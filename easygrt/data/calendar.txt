@@ -1,0 +1,6 @@
+service_id,monday,tuesday,wednesday,thursday,friday,saturday,sunday,start_date,end_date
+a,0,0,0,0,0,1,0,20130429,20130623
+muw,1,1,1,0,0,0,0,20130429,20130623
+muwtf,1,1,1,1,1,0,0,20130429,20130623
+s,0,0,0,0,0,0,1,20130429,20130623
+tf,0,0,0,1,1,0,0,20130429,20130623

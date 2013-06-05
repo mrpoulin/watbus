@@ -1,0 +1,4 @@
+service_id,date,exception_type
+muw,20130520,2
+muwtf,20130520,2
+s,20130520,1
