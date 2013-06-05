@@ -10,5 +10,5 @@ Make sure you have python 2.7.4 installed and configured. This project is not us
 
 ### Installing Django
 
-This project is using Django 1.5. Please see https://docs.djangoproject.com/en/dev/topics/install/#installing-official-release
+This project is using Django 1.5. Please see [Installing Django 1.5](https://docs.djangoproject.com/en/dev/topics/install/#installing-official-release)
 
