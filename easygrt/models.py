@@ -14,8 +14,8 @@ class Stops(models.Model):
     
 class StopTimes(models.Model):
     trip_id = models.IntegerField()
-    arrival_time = models.TimeField()
-    departure_time = models.TimeField()
+    arrival_time = models.CharField(max_length = 10)
+    departure_time = models.CharField(max_length = 10)
     stop_id = models.IntegerField()
 
 class Trips(models.Model):
@@ -26,20 +26,20 @@ class Trips(models.Model):
 
 class Routes(models.Model):
     route_id = models.IntegerField(primary_key = True, unique = True)
-    long_name = models.CharField(max_length = 60)
+    route_long_name = models.CharField(max_length = 60)
 
 class Calendar(models.Model):
     service_id = models.CharField(max_length = 5)
     monday = models.IntegerField()
-    tueday =  models.IntegerField()
+    tuesday =  models.IntegerField()
     wednesday = models.IntegerField()
     thursday = models.IntegerField()
     friday = models.IntegerField()
     saturday = models.IntegerField()
     sunday = models.IntegerField()
-    start_date = models.DateField()
-    end_date = models.DateField()
+    start_date = models.CharField(max_length=10)
+    end_date = models.CharField(max_length=10)
 
 class CalendarDates(models.Model):
     service_id = models.CharField(max_length = 5)
-    date = models.DateField()
+    date = models.CharField(max_length = 10)
