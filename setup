@@ -1,0 +1,66 @@
+#!/bin/bash
+#
+# Description: 
+# Creates a fresh copy of the gtfs data, clears the database and then populates new database tables.
+# Script must be run from main project directory.
+# 
+# Usage:
+# setup [-s|--shutdown] [-f gtfs_data_path]
+#
+# Arguments:
+# Pass an optional -s to turn off your computer when the import is finished.
+# Pass the -f parameter to choose an alternate location for data files. Default is ./easygrt/data
+#
+# Logging:
+# Output is sent to stdout as well as a text file named "setup.log" 
+#
+usage() {
+  
+  echo "setup [-s|--shutdown] [-f gtfs_data_path]"
+}
+
+defaults() {
+
+  shutdown_flag=NO
+  gtfs_data_path="./easygrt/data"
+
+}
+
+get_logfile() {
+
+  logfile="setup.log"
+}
+
+
+run_python() {
+
+  echo "Downloading & extracting data" | tee ${logfile}
+  python manage.py getdata
+  echo "Clearing DB" | tee ${logfile}
+  python manage.py sqlclear easygrt | python manage.py dbshell | tee ${logfile}
+  echo "Re-syncing DB" | tee ${logfile}
+  python manage.py syncdb | tee ${logfile}
+  echo "Starting import" | tee {$logfile}
+  python manage.py importdata | tee ${logfile}
+
+}
+
+defaults
+
+for i in $@ ; do
+  case $i in 
+    -s|--shutdown)
+      shutdown_flag=YES
+      ;;
+    -f=*)
+      gtfs_data_path=`echo $i | sed 's/[-a-zA-Z0-9]*=//'`
+      ;;
+    *)
+      usage
+      exit
+      ;;
+  esac
+done
+
+get_logfile
+run_python
