@@ -1,3 +1,4 @@
 *.pyc
 *.*~
 easygrt/data/
+*.sqlite3
