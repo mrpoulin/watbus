@@ -13,7 +13,7 @@
 # Pass the -f parameter to choose an alternate location for data files. Default is ./easygrt/data
 #
 # Logging:
-# Output is sent to stdout as well as a text file named "setup.log" 
+# Output is sent to stdout (since the script completes quickly).
 #
 usage() {
   
@@ -28,28 +28,21 @@ defaults() {
 
 }
 
-get_logfile() {
-
-  logfile="setup.log"
-
-}
-
-
 run_python() {
 
   if [ "$clean_only" == "NO" -a  "$import_only" == "NO" ] ; then
-    echo "Downloading & extracting data" | tee ${logfile}
+    echo "Downloading & extracting data" 
     python manage.py getdata $gtfs_data_path
   fi
 
-  echo "Clearing DB" | tee ${logfile}
-  python manage.py sqlclear easygrt | python manage.py dbshell | tee ${logfile}
-  echo "Re-syncing DB" | tee ${logfile}
-  python manage.py syncdb | tee ${logfile}
+  echo "Clearing DB" 
+  python manage.py sqlclear easygrt | python manage.py dbshell
+  echo "Re-syncing DB" 
+  python manage.py syncdb 
 
   if [ "$clean_only" == "NO" ] ; then
-    echo "Starting import" | tee {$logfile}
-    python manage.py importdata $gtfs_data_path | tee ${logfile}
+    echo "Starting import" 
+    python manage.py importdata $gtfs_data_path
   fi
 
 }
@@ -74,5 +67,4 @@ for i in $@ ; do
   esac
 done
 
-get_logfile
 run_python
