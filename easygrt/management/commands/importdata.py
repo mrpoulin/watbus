@@ -3,12 +3,12 @@ import os.path
 from sys import stdout
 from datetime import time, date
 from easygrt.models import *
+from django.db import transaction
 import dse
 
 
 #Allows for the easy importing of csv data.
 #TODO: Switch to using csv model for parsing.
-#TODO: Speed up importing - it's too slow! See https://bitbucket.org/weholt/dse2 or BulkInsert (Django)
 class Command(BaseCommand):
 
     class CsvReadError(Exception):
@@ -33,11 +33,11 @@ class Command(BaseCommand):
         #Necessary call to allow dse to work
         dse.patch_models()
         #Files must be loaded in particular order because of foreign key relationships.
-        #self._import_calendar(os.path.join(args[0], 'calendar.txt'))
-        #self._import_calendar_dates(os.path.join(args[0], 'calendar_dates.txt'))
-        #self._import_routes(os.path.join(args[0], 'routes.txt'))
-        #self._import_trips(os.path.join(args[0], 'trips.txt'))
-        #self._import_stops(os.path.join(args[0], 'stops.txt')),
+        self._import_calendar(os.path.join(args[0], 'calendar.txt'))
+        self._import_calendar_dates(os.path.join(args[0], 'calendar_dates.txt'))
+        self._import_routes(os.path.join(args[0], 'routes.txt'))
+        self._import_trips(os.path.join(args[0], 'trips.txt'))
+        self._import_stops(os.path.join(args[0], 'stops.txt'))
         self._import_stop_times(os.path.join(args[0], 'stop_times.txt'))
 
 
@@ -89,80 +89,72 @@ class Command(BaseCommand):
     #Converts the HH:MM:SS time format used in GTFS to python time object. 
     def _convert_time(self, timestr):
 
-        #Time objects only accept hour values between 00..23, whereas GTFS uses the range 01..24
-        timestr = timestr.replace('24', '00')
-        return time(int(timestr[0:2]), int(timestr[3:5]), int(timestr[6:8]))
+        #Time objects only accept hour values between 00..23, whereas GTFS uses the range 01..
+        hour = int(timestr[0:2])
+        if hour >= 24:
+            hour -= 24
+
+        return time(hour, int(timestr[3:5]), int(timestr[6:8]))
 
     def _import_calendar(self, path):
-        
-        for data in self._parse_csv(path, ','):
 
-            Calendar.objects.get_or_create(
-                service_id = data['service_id'],
-                monday = int(data['monday']),
-                tuesday = int(data['tuesday']),
-                wednesday = int(data['wednesday']),
-                thursday = int(data['thursday']),
-                friday = int(data['friday']),
-                saturday = int(data['saturday']),
-                sunday = int(data['sunday']),
-                start_date = self._convert_date(data['start_date']),
-                end_date = self._convert_date(data['end_date']),
-                )
+        with transaction.commit_on_success():
+            with Calendar.delayed as d:
+                for data in self._parse_csv(path, ','):
+                    data['monday'] = int(data['monday'])
+                    data['tuesday'] = int(data['tuesday'])
+                    data['wednesday'] = int(data['wednesday'])
+                    data['thursday'] = int(data['thursday'])
+                    data['friday'] = int(data['friday'])
+                    data['saturday'] = int(data['saturday'])
+                    data['sunday'] = int(data['sunday'])
+                    data['start_date'] = self._convert_date(data['start_date'])
+                    data['end_date'] = self._convert_date(data['end_date'])
+                    d.insert(data)
 
     def _import_calendar_dates(self, path):
 
-        for data in self._parse_csv(path, ','):
-
-            CalendarDates.objects.get_or_create(
-                    service_id = Calendar.objects.get(service_id = data['service_id']),
-                    date = self._convert_date(data['date']),
-                    )
+        with transaction.commit_on_success():
+            with CalendarDates.delayed as d:
+                for data in self._parse_csv(path, ','):
+                    data['date'] = self._convert_date(data['date'])
+                    d.insert(data)
 
 
     def _import_routes(self, path):
-
-        for data in self._parse_csv(path, ','):
-
-            Routes.objects.get_or_create(
-                    route_id = int(data['route_id']),
-                    route_long_name = data['route_long_name'],
-                    )
+        
+        with transaction.commit_on_success():
+            with Routes.delayed as d:
+                for data in self._parse_csv(path, ','):
+                    data['route_id'] = int(data['route_id'])
+                    d.insert(data)
 
     def _import_trips(self, path):
 
-        for data in self._parse_csv(path, ','):
-
-            Trips.objects.get_or_create(
-                    route_id = Routes.objects.get(route_id = int(data['route_id'])),
-                    service_id = Calendar.objects.get(service_id = data['service_id']),
-                    trip_id = int(data['trip_id']),
-                    trip_headsign = data['trip_headsign'],
-                    )
+        with transaction.commit_on_success():
+            with Trips.delayed as d: 
+                for data in self._parse_csv(path, ','):
+                    data['trip_id'] = int(data['trip_id'])
+                    d.insert(data)
 
     def _import_stops(self, path):
 
-        for data in self._parse_csv(path, ','):
-
-            Stops.objects.get_or_create(
-                    stop_id = int(data['stop_id']),
-                    stop_name = data['stop_name'],
-                    stop_lat = float(data['stop_lat']),
-                    stop_lon = float(data['stop_lon']),
-                    )
+        with transaction.commit_on_success():
+            with Stops.delayed as d:
+                for data in self._parse_csv(path, ','):
+                    data['stop_id'] = int(data['stop_id'])
+                    data['stop_lat'] = float(data['stop_lat'])
+                    data['stop_lon'] = float(data['stop_lon'])
+                    d.insert(data)
 
     def _import_stop_times(self, path):
 
-        with StopTimes.delayed as d:
-            for data in self._parse_csv(path, ','):
-                    data['trip_id_id'] = int(data['trip_id'])
-                    data['arrival_time'] = self._convert_time(data['arrival_time'])
-                    data['departure_time'] = self._convert_time(data['departure_time'])
-                    data['stop_id_id'] = int(data['stop_id'])
-
-                    #Annoying thing the ORM does.
-                    del data['stop_id']
-                    del data['trip_id']
-
-                    d.insert(data)
+        with transaction.commit_on_success():
+            with StopTimes.delayed as d:
+                for data in self._parse_csv(path, ','):
+                        data['trip_id'] = int(data['trip_id'])
+                        data['arrival_time'] = self._convert_time(data['arrival_time']).__str__()
+                        data['departure_time'] = self._convert_time(data['departure_time']).__str__()
+                        data['stop_id'] = int(data['stop_id'])
+                        d.insert(data)
 

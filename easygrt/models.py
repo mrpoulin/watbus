@@ -19,6 +19,8 @@ class Calendar(models.Model):
     end_date = models.DateField()
 
 class CalendarDates(models.Model):
+    #db_column set since django automatically appends _id to foregin keys. I.e. django
+    #would name this column 'service_id_id'
     service_id = models.ForeignKey(Calendar, db_column='service_id')
     date = models.DateField()
     
@@ -27,8 +29,8 @@ class Routes(models.Model):
     route_long_name = models.CharField(max_length = 60)
 
 class Trips(models.Model):
-    route_id = models.ForeignKey(Routes)
-    service_id = models.ForeignKey(Calendar)
+    route_id = models.ForeignKey(Routes, db_column='route_id')
+    service_id = models.ForeignKey(Calendar, db_column='service_id')
     trip_id = models.IntegerField(primary_key = True, unique = True)
     trip_headsign = models.CharField(max_length = 50)
 
@@ -39,9 +41,9 @@ class Stops(models.Model):
     stop_lon = models.DecimalField(max_digits = 8, decimal_places = 6)
     
 class StopTimes(models.Model):
-    trip_id = models.ForeignKey(Trips)
+    trip_id = models.ForeignKey(Trips, db_column='trip_id')
     arrival_time = models.TimeField()
     departure_time = models.TimeField()
-    stop_id = models.ForeignKey(Stops)
+    stop_id = models.ForeignKey(Stops, db_column='stop_id')
 
 
