@@ -142,7 +142,6 @@ class Command(BaseCommand):
         with transaction.commit_on_success():
             with Stops.delayed as d:
                 for data in self._parse_csv(path, ','):
-                    data['stop_id'] = int(data['stop_id'])
                     data['stop_lat'] = float(data['stop_lat'])
                     data['stop_lon'] = float(data['stop_lon'])
                     d.insert(data)
@@ -155,6 +154,5 @@ class Command(BaseCommand):
                         data['trip_id'] = int(data['trip_id'])
                         data['arrival_time'] = self._convert_time(data['arrival_time']).__str__()
                         data['departure_time'] = self._convert_time(data['departure_time']).__str__()
-                        data['stop_id'] = int(data['stop_id'])
                         d.insert(data)
 

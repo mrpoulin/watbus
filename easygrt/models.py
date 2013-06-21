@@ -35,7 +35,7 @@ class Trips(models.Model):
     trip_headsign = models.CharField(max_length = 50)
 
 class Stops(models.Model):
-    stop_id = models.IntegerField(primary_key = True, unique = True)
+    stop_id = models.CharField(primary_key = True, unique = True, max_length = 30)
     stop_name = models.CharField(max_length = 50)
     stop_lat = models.DecimalField(max_digits = 8, decimal_places = 6)
     stop_lon = models.DecimalField(max_digits = 8, decimal_places = 6)
