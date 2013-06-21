@@ -5,10 +5,11 @@
 # Script must be run from main project directory.
 # 
 # Usage:
-# setup [-s|--shutdown] [-f gtfs_data_path]
+# setup [-c|--clean-db] [-i|--import-only] [-f gtfs_data_path]
 #
 # Arguments:
-# Pass an optional -s to turn off your computer when the import is finished.
+# Pass the -c parameter to clean and resync the db only.
+# Pass -i parameter to only clean db & import data (no download)
 # Pass the -f parameter to choose an alternate location for data files. Default is ./easygrt/data
 #
 # Logging:
@@ -16,12 +17,13 @@
 #
 usage() {
   
-  echo "setup [-s|--shutdown] [-f gtfs_data_path]"
+  echo "setup [-c|--clean-db] [-i|--import-only] [-f gtfs_data_path]"
 }
 
 defaults() {
 
-  shutdown_flag=NO
+  clean_only="NO"
+  import_only="NO"
   gtfs_data_path="./easygrt/data"
 
 }
@@ -29,19 +31,26 @@ defaults() {
 get_logfile() {
 
   logfile="setup.log"
+
 }
 
 
 run_python() {
 
-  echo "Downloading & extracting data" | tee ${logfile}
-  python manage.py getdata
+  if [ "$clean_only" == "NO" -a  "$import_only" == "NO" ] ; then
+    echo "Downloading & extracting data" | tee ${logfile}
+    python manage.py getdata $gtfs_data_path
+  fi
+
   echo "Clearing DB" | tee ${logfile}
   python manage.py sqlclear easygrt | python manage.py dbshell | tee ${logfile}
   echo "Re-syncing DB" | tee ${logfile}
   python manage.py syncdb | tee ${logfile}
-  echo "Starting import" | tee {$logfile}
-  python manage.py importdata | tee ${logfile}
+
+  if [ "$clean_only" == "NO" ] ; then
+    echo "Starting import" | tee {$logfile}
+    python manage.py importdata $gtfs_data_path | tee ${logfile}
+  fi
 
 }
 
@@ -49,8 +58,11 @@ defaults
 
 for i in $@ ; do
   case $i in 
-    -s|--shutdown)
-      shutdown_flag=YES
+    -c|--clean-db)
+      clean_only="YES"
+      ;;
+    -i|--import-only)
+      import_only="YES"
       ;;
     -f=*)
       gtfs_data_path=`echo $i | sed 's/[-a-zA-Z0-9]*=//'`
