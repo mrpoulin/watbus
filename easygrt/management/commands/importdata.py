@@ -154,5 +154,6 @@ class Command(BaseCommand):
                         data['trip_id'] = int(data['trip_id'])
                         data['arrival_time'] = self._convert_time(data['arrival_time']).__str__()
                         data['departure_time'] = self._convert_time(data['departure_time']).__str__()
+                        data['stop_sequence'] = int(data['stop_sequence'])
                         d.insert(data)
 

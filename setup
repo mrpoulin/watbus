@@ -32,6 +32,7 @@ run_python() {
 
   if [ "$clean_only" == "NO" -a  "$import_only" == "NO" ] ; then
     echo "Downloading & extracting data" 
+    rm -fr $gtfs_data_path
     python manage.py getdata $gtfs_data_path
   fi
 
