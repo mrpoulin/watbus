@@ -1,0 +1,80 @@
+
+body { background: #000000; padding: 0; margin: 0;}
+
+a {text-decoration: none;}
+
+.container {width: 480px; margin: 0 auto; color: #ffffff; font: 12pt roboto; background: url('../img/bg.png'); height: 100%;}
+.header {padding: 30px; text-align: center;}
+
+.nav {background: #000000; text-align: center; padding: 0; margin: 0; }
+.nav ul {margin: 0; padding: 0;}
+.navitem { display: inline-block; width: 33%; text-align: center; margin: 0; padding: 5px 0 5px 0; list-style: none; font-size: 10pt; }
+.navitem a {color: #454545;}
+.current a{color: #878787;}
+
+.clear {clear: both;}
+
+
+.favlink a {
+	color: #ffffff;
+	display: block;
+  padding: 10px 10px 10px 20px;
+	background: url('../img/arrow.png') no-repeat center right;
+}
+
+.favlink{
+  background: url('../img/titlegrad.png') repeat-x;
+  font: 18pt helvetica;
+  font-weight: lighter;
+  padding-right: 20px;
+}
+
+.title {
+  background: url('../img/titlegrad.png') repeat-x;
+  font: 18pt helvetica;
+  font-weight: lighter;
+  text-align: center;
+  padding-right: 20px;
+}
+
+.title a {
+	color: #ffffff;
+	display: block;
+	background: url('../img/star.png') no-repeat center right;
+  padding: 10px;
+}
+
+
+.lineitem tr{
+	background: url('../img/itemgrad.png') repeat-x;
+	height: 66px;
+}
+
+.l_time {
+	color: #178899;
+	font: 22pt helvetica;
+	font-weight: lighter;
+	float: left;
+	padding: 10px 0 10px 10px;
+	vertical-align: middle;
+}
+
+.l_name {
+	width: 100%;
+	color: #dddddd;
+	font: 14pt helvetica;
+	font-weight: lighter;
+	float: left;
+	padding: 10px 0 10px 12px;
+	vertical-align: middle;
+}
+
+.l_route {
+	color: #ffffff;
+	font: 22pt helvetica;
+	font-weight: bold;
+	padding: 0 16px 0 0;
+	float: right;
+	vertical-align: middle;
+}
+	
