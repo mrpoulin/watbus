@@ -14,9 +14,13 @@ This project is using Django 1.5. Please see [Installing Django 1.5](https://doc
 
 #### Django Setup
 
-''Database'': SQLite
+**Database**: SQLite
 
 ### Project Setup
 
 To download the relevant GTFS data and import it to the database, run the setup bash script in the main directory.
 The setup script runs two admin commands, getdata and importdata, which can be run individually to fetch the GTFS data and sync it to the DB respectively. 
+
+#### Dependencies
+
+**DSE**: https://bitbucket.org/weholt/dse4
