@@ -1,6 +1,7 @@
-# EasyGrt
+# EasyGRT
 
-EasyGrt is a web application written to use Grand River Transit's GTFS data to summarize and display bus stop times in a useful way.
+EasyGRT is a web application to summarize and display bus stop times in a useful way.
+It is written to use Grand River Transit's GTFS data.
 
 ## Getting Started
 
