@@ -11,7 +11,6 @@
     <div class="container">
       <div class="header"><a href="/"><img src="{% static "easygrt/img/header.png" %}" /></a>
       </div>
-
       <div class="nav">
         <ul>
              <li class="navitem {% if urlname == "map" %}current{% endif %}"><a href={% url 'easygrt.views.map' %}>MAP</a></li><!--
@@ -19,9 +18,12 @@
           --><li class="navitem {% if urlname == "browse" %}current{% endif %}"><a href={% url 'easygrt.views.browse' %}>BROWSE</a></li>
         </ul>
       </div>
-
+      <div class="search">
+        <form action={% url 'easygrt.views.search' %} method="get">
+          <input type="text" name="query">
+          <input type="submit" value="Search">
+      </div>
       <div class=clear></div>
-
       <div class="content">
         {% block content %} {% endblock %}
       </div>
