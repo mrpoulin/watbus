@@ -5,7 +5,7 @@ from easygrt.models import StopTimes
 import re
 
 def __getWeekdayString(weekday):
-    
+
     return {
 
             0 : 'monday',
@@ -62,7 +62,7 @@ def browse_stops(request, stop_id):
             'arrival_time'
     )
 
-    context = { 'next_buses' : next_buses }
+    context = { 'next_buses' : next_buses, 'stop_id' : stop_id }
     return render(request, 'easygrt/browse_stops.html', context)
 
 def browse_routes(request, route_id):

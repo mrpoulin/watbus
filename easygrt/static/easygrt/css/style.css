@@ -1,7 +1,11 @@
 
+/* ---- General ---- */
+
 body { background: #000000; padding: 0; margin: 0;}
 
 a {text-decoration: none;}
+
+/* ----  Header ---- */
 
 .container {width: 480px; margin: 0 auto; color: #ffffff; font: 12pt roboto; background: url('../img/bg.png'); height: 100%;}
 .header {padding: 30px; text-align: center;}
@@ -14,6 +18,17 @@ a {text-decoration: none;}
 
 .clear {clear: both;}
 
+/* ----  Search ---- */
+
+.stop_search {
+  background: #0097AB url('../img/titlegrad.png') repeat-x;
+  font: 18pt helvetica;
+  font-weight: lighter;
+  padding: 10px;
+}
+
+
+/*  ---- Favourites ---- */
 
 .favlink a {
 	color: #ffffff;
@@ -44,37 +59,38 @@ a {text-decoration: none;}
   padding: 10px;
 }
 
+/* ---- Bus List  ---- */
 
-.lineitem tr{
-	background: url('../img/itemgrad.png') repeat-x;
-	height: 66px;
+.lineitem{
+	background: #3a3a3a url('../img/itemgrad.png') repeat-x;
+    width: 100%;
 }
 
 .l_time {
 	color: #178899;
-	font: 22pt helvetica;
+	font: 20pt helvetica;
 	font-weight: lighter;
-	float: left;
-	padding: 10px 0 10px 10px;
 	vertical-align: middle;
-}
-
-.l_name {
-	width: 100%;
-	color: #dddddd;
-	font: 14pt helvetica;
-	font-weight: lighter;
-	float: left;
-	padding: 10px 0 10px 12px;
-	vertical-align: middle;
+    padding: 0 0 0 10px;
+    width: 30%;
 }
 
 .l_route {
 	color: #ffffff;
-	font: 22pt helvetica;
-	font-weight: bold;
+	font: bold 22pt helvetica;
 	padding: 0 16px 0 0;
-	float: right;
+    padding: 10px 10px 5px 0;
+    text-align: right;
 	vertical-align: middle;
 }
 	
+.l_name {
+	width: 100%;
+	color: #dddddd;
+	font: 12pt helvetica;
+	font-weight: lighter;
+    text-align: right;
+    padding: 0 10px 10px 0;
+	vertical-align: middle;
+}
+

@@ -1,21 +1,26 @@
 {% extends "easygrt/base.html" %}
 
-{% block title %} EasyGrt - Stop: {{ stop_id }} {% endblock %}
+{% block title %} EasyGrt - Stop:  {{ stop_id }} {% endblock %}
 
 {% block content %} 
 {% for bus in next_buses %}
-  <table cellpadding="0" cellspacing="0" class="lineitem">
-      <tr>
-        <td class="l_time">
-          {{ bus.arrival_time }}
-        </td>
-        <td class="l_name">
-          {{ bus.trip_id.trip_headsign }}
+
+<table cellpadding="0" cellspacing="0" class="lineitem">
+    <tr>
+        <td class="l_time" rowspan="2">
+            {{ bus.arrival_time }}
         </td>
         <td class="l_route">
-          {{ bus.trip_id.route_id.route_long_name }}
+            {{ bus.trip_id.route_id.route_id}}
+            {{ bus.trip_id.route_id.route_long_name }}
         </td>
-      </tr>
-  </table>
+    </tr>
+    <tr>
+        <td class="l_name">
+            {{ bus.trip_id.trip_headsign }}
+        </td>
+    </tr>
+</table>
+
 {% endfor %}
 {% endblock %} 

@@ -18,7 +18,7 @@
           --><li class="navitem {% if urlname == "browse" %}current{% endif %}"><a href={% url 'easygrt.views.browse' %}>BROWSE</a></li>
         </ul>
       </div>
-      <div class="search">
+      <div class="stop_search">
         <form action={% url 'easygrt.views.search' %} method="get">
           <input type="text" name="query">
           <input type="submit" value="Search">
