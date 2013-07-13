@@ -3,24 +3,23 @@
 {% block title %} EasyGrt - Stop:  {{ stop_id }} {% endblock %}
 
 {% block content %} 
-{% for bus in next_buses %}
 
-<table cellpadding="0" cellspacing="0" class="lineitem">
-    <tr>
-        <td class="l_time" rowspan="2">
-            {{ bus.arrival_time }}
-        </td>
-        <td class="l_route">
-            {{ bus.trip_id.route_id.route_id}}
-            {{ bus.trip_id.route_id.route_long_name }}
-        </td>
-    </tr>
-    <tr>
-        <td class="l_name">
-            {{ bus.trip_id.trip_headsign }}
-        </td>
-    </tr>
-</table>
+  {% for route,buses in next_buses_by_route.items %}
+    <ul>
+      <li> 
+        <span> {{ buses.0.arrival_time }} </span>
+        <span> {{ route }} </span>
+        <span> {{ buses.0.trip_id.route_id.route_long_name }} </span>
+      </li>
 
-{% endfor %}
+      <ul>
+        {% for bus in buses|slice:"1:" %}
+        <li>
+          <span> {{ bus.arrival_time }} </span>
+          <span> {{ route }} </span>
+        </li>
+        {% endfor %}
+      </ul>
+  </ul>
+  {% endfor %}
 {% endblock %} 

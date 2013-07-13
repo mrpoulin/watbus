@@ -1,8 +1,10 @@
 from django.shortcuts import render, redirect, get_list_or_404
 from django.http import HttpResponse, HttpResponseBadRequest, Http404
+from collections import defaultdict
 from datetime import date, time, datetime
 from easygrt.models import StopTimes
 import re
+import pprint
 
 def __getWeekdayString(weekday):
 
@@ -44,11 +46,11 @@ def browse_stops(request, stop_id):
     curr_day = date.today()
     day_selector_keyword = 'trip_id__service_id__' + __getWeekdayString(datetime.today().weekday())
 
-    next_buses = StopTimes.objects.filter(stop_id=stop_id)
-    if not next_buses:
+    next_bus_list = StopTimes.objects.filter(stop_id=stop_id)
+    if not next_bus_list:
         raise Http404
 
-    next_buses = next_buses.select_related(
+    next_bus_list = next_bus_list.select_related(
             'trip_id'
     ).filter(
             arrival_time__gte=curr_time
@@ -62,7 +64,12 @@ def browse_stops(request, stop_id):
             'arrival_time'
     )
 
-    context = { 'next_buses' : next_buses, 'stop_id' : stop_id }
+    grouped = defaultdict(list)
+
+    for bus in next_bus_list:
+        grouped[bus.trip_id.route_id.route_id].append(bus)
+
+    context = { 'next_buses_by_route' : dict(grouped), 'stop_id' : stop_id }
     return render(request, 'easygrt/browse_stops.html', context)
 
 def browse_routes(request, route_id):
