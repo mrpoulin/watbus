@@ -6,17 +6,19 @@
 
   {% for route,buses in next_buses_by_route.items %}
     <ul>
-      <li> 
-        <span> {{ buses.0.arrival_time }} </span>
-        <span> {{ route }} </span>
-        <span> {{ buses.0.trip_id.route_id.route_long_name }} </span>
+      <li class='s_listhead'> 
+        <span class='s_time'> {{ buses.0.arrival_time }} </span>
+        <span class='s_route'> {{ route }} </span>
+        <span class='s_routename'> {{ buses.0.trip_id.route_id.route_long_name }} </span>
+        <span class='s_headsign'> {{ buses.0.trip_id.trip_headsign }}</span>
       </li>
 
       <ul>
         {% for bus in buses|slice:"1:" %}
-        <li>
-          <span> {{ bus.arrival_time }} </span>
-          <span> {{ route }} </span>
+        <li class='s_sublist'>
+          <span class='s_time'> {{ bus.arrival_time }} </span>
+          <span class='s_route'> {{ route }} </span>
+          <span class='s_routename'> {{ bus.trip_id.route_id.route_long_name }} </span>
         </li>
         {% endfor %}
       </ul>

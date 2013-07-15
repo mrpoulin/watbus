@@ -61,36 +61,57 @@ a {text-decoration: none;}
 
 /* ---- Bus List  ---- */
 
-.lineitem{
-	background: #3a3a3a url('../img/itemgrad.png') repeat-x;
-    width: 100%;
+.content ul 
+{ 
+  list-style-type: none;
+  width: 100%;
+  padding: 0px;
+  margin: 0px;
 }
 
-.l_time {
-	color: #178899;
+.content ul li
+{
+  overflow: hidden;
+}
+
+.content li span
+{
+  display:block;
+}
+
+.s_listhead
+{
+  background: #3a3a3a url('../img/itemgrad.png') repeat-x;
+  height: 70px;
+}
+
+.s_sublist
+{
+  height: 40px;
+  margin: 0 0 0 30px;
+}
+
+.s_time
+{
+  color: #178899;
 	font: 20pt helvetica;
 	font-weight: lighter;
-	vertical-align: middle;
-    padding: 0 0 0 10px;
-    width: 30%;
+  float: left;
 }
 
-.l_route {
-	color: #ffffff;
-	font: bold 22pt helvetica;
-	padding: 0 16px 0 0;
-    padding: 10px 10px 5px 0;
-    text-align: right;
-	vertical-align: middle;
+.s_route, .s_routename
+{
+  color: #ffffff;
+  float: right;
+  padding: 3px;
+  font: bold 22pt helvetica;
 }
-	
-.l_name {
-	width: 100%;
+
+.s_headsign
+{
 	color: #dddddd;
 	font: 12pt helvetica;
+  float: right;
+  clear: both;
 	font-weight: lighter;
-    text-align: right;
-    padding: 0 10px 10px 0;
-	vertical-align: middle;
-}
-
+} 
