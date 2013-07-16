@@ -4,9 +4,9 @@
 
 {% block content %} 
 
-  {% for route,buses in next_buses_by_route.items %}
+  {% for route,buses in next_buses_by_route %}
     <ul>
-      <li class='s_listhead'> 
+      <li class='s_listhead' onclick='location.href="{% url 'easygrt.views.browse_trips' buses.0.trip_id.trip_id %}"'> 
         <span class='s_time'> {{ buses.0.arrival_time }} </span>
         <span class='s_route'> {{ route }} </span>
         <span class='s_routename'> {{ buses.0.trip_id.route_id.route_long_name }} </span>
@@ -14,7 +14,7 @@
       </li>
 
       <ul>
-        {% for bus in buses|slice:"1:" %}
+        {% for bus in buses|slice:"1:4" %}
         <li class='s_sublist'>
           <span class='s_time'> {{ bus.arrival_time }} </span>
           <span class='s_route'> {{ route }} </span>

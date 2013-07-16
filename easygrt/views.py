@@ -1,10 +1,10 @@
 from django.shortcuts import render, redirect, get_list_or_404
+import pprint
 from django.http import HttpResponse, HttpResponseBadRequest, Http404
-from collections import defaultdict
+from collections import defaultdict, OrderedDict
 from datetime import date, time, datetime
 from easygrt.models import StopTimes
 import re
-import pprint
 
 def __getWeekdayString(weekday):
 
@@ -63,16 +63,20 @@ def browse_stops(request, stop_id):
     ).order_by(
             'arrival_time'
     )
-
-    grouped = defaultdict(list)
+    
+    grouped = OrderedDict()
 
     for bus in next_bus_list:
-        grouped[bus.trip_id.route_id.route_id].append(bus)
+        route_id = bus.trip_id.route_id.route_id
+        if route_id not in grouped:
+            grouped[route_id] = [bus]
+        else:
+            grouped[route_id].append(bus)
 
-    context = { 'next_buses_by_route' : dict(grouped), 'stop_id' : stop_id }
+    context = { 'next_buses_by_route' : grouped.iteritems(), 'stop_id' : stop_id }
     return render(request, 'easygrt/browse_stops.html', context)
 
-def browse_routes(request, route_id):
+def browse_trips(request, trip_id):
 
-    return render(request, 'easygrt/browse_routes.html')
+    return render(request, 'easygrt/browse_trips.html')
 

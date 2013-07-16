@@ -9,5 +9,5 @@ urlpatterns = patterns('',
         url(r'^map/$', views.map, name='map'),
         url(r'^browse/$', views.browse, name='browse'),
         url(r'^browse/stops/(?P<stop_id>\d+)/$', views.browse_stops, name='browse_stops'),
-        url(r'^browse/routes/(?P<route_id>\d+)/$', views.browse_routes, name='browse_routes'),
+        url(r'^browse/trips/(?P<trip_id>\d+)/$', views.browse_trips, name='browse_trips'),
 )
