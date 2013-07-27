@@ -79,7 +79,7 @@ a {text-decoration: none;}
   display:block;
 }
 
-.s_listhead
+.s_listhead, .t_listhead
 {
   background: #3a3a3a url('../img/itemgrad.png') repeat-x;
   height: 70px;
@@ -91,7 +91,7 @@ a {text-decoration: none;}
   margin: 0 0 0 30px;
 }
 
-.s_time
+.s_time, .t_time
 {
   color: #178899;
 	font: 20pt helvetica;
@@ -99,15 +99,15 @@ a {text-decoration: none;}
   float: left;
 }
 
-.s_route, .s_routename
+.s_route, .s_routename, .t_stopid, .t_stopname
 {
   color: #ffffff;
   float: right;
   padding: 3px;
-  font: bold 22pt helvetica;
+  font: bold 16pt helvetica;
 }
 
-.s_headsign
+.s_headsign, .t_headsign
 {
 	color: #dddddd;
 	font: 12pt helvetica;

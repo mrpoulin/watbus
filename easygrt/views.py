@@ -1,5 +1,4 @@
 from django.shortcuts import render, redirect, get_list_or_404
-import pprint
 from django.http import HttpResponse, HttpResponseBadRequest, Http404
 from collections import defaultdict, OrderedDict
 from datetime import date, time, datetime
@@ -78,5 +77,28 @@ def browse_stops(request, stop_id):
 
 def browse_trips(request, trip_id):
 
-    return render(request, 'easygrt/browse_trips.html')
+    curr_time = datetime.now();
+    curr_day = date.today();
+    day_selector_keyword = 'trip_id__service_id__' + __getWeekdayString(datetime.today().weekday())
 
+    next_bus_list = StopTimes.objects.filter(trip_id=trip_id)
+    if not next_bus_list:
+        raise Http404
+
+    
+    next_bus_list = next_bus_list.select_related(
+            'trip_id'
+    ).filter(
+            arrival_time__gte=curr_time
+    ).filter(
+            trip_id__service_id__start_date__lte=curr_day
+    ).filter(
+            trip_id__service_id__end_date__gte=curr_day
+    ).filter(
+            **{ day_selector_keyword : 1}
+    ).order_by(
+            'stop_sequence'
+    )
+
+    context = {'next_buses_by_stop' : next_bus_list, 'trip_id' : trip_id }
+    return render(request, 'easygrt/browse_trips.html', context)
