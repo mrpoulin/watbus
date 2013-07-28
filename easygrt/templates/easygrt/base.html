@@ -1,30 +1,39 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>{% block title %} EasyGRT {% endblock %} </title>
 
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>{% block title %} EasyGRT {% endblock %} </title>
     {% load staticfiles %}
     <link rel="stylesheet" type="text/css" href="{% static "easygrt/css/style.css" %}">
+    {% block headscripts %} {% endblock %}
   </head>
 
-  <body>
+  <body {% block bodyattributes %}{% endblock %}> 
     <div class="container">
-      <div class="header"><a href="/"><img src="{% static "easygrt/img/header.png" %}" /></a>
-      </div>
+        <header class="top">
+        <div class="header"><a href="/"><img src="{% static "easygrt/img/header.png" %}" /></a>
+        </div>
 
       <div class="nav">
         <ul>
-             <li class="navitem {% if urlname == "map" %}current{% endif %}"><a href={% url 'easygrt.views.map' %}>MAP</a></li><!--
-          --><li class="navitem {% if urlname == "favourites" %}current{% endif %}"><a href={% url 'easygrt.views.favourites' %}>FAVOURITES</a></li><!--
-          --><li class="navitem {% if urlname == "browse" %}current{% endif %}"><a href={% url 'easygrt.views.browse' %}>BROWSE</a></li>
+            <li class="navitem {% if urlname == "map" %}current{% endif %}">
+            <a href={% url 'easygrt.views.map' %}>MAP</a></li>
+            <li class="navitem {% if urlname == "favourites" %}current{% endif %}">
+            <a href={% url 'easygrt.views.favourites' %}>FAVOURITES</a></li>
+            <li class="navitem {% if urlname == "browse" %}current{% endif %}">
+            <a href={% url 'easygrt.views.browse' %}>BROWSE</a></li>
         </ul>
       </div>
+      </header>
 
-      <div class=clear></div>
-
-      <div class="content">
+    <div class=clear></div>
+    <section id="content">
         {% block content %} {% endblock %}
-      </div>
+    </section>
+    <footer id="contentfoot">
+    EasyGRT &copy; 2013 Marc Poulin and Holly Xu. We are not associated with <a href="http://grt.ca/">Grand River Transit</a>.
+    </footer>
     </div>
   </body>
 </html>
