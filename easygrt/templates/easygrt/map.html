@@ -22,13 +22,15 @@
 {% block content %} 
 <div id="map-canvas"></div>
     <script>
-        $("#map-canvas").gmap3();
-        console.log('lol');
+        $("#map-canvas").gmap3();   // Create the map
         $.getJSON("{% url 'easygrt.views.stopjson' %}", function(data){
-            $('.randomdiv').html(data);
-            console.log('done');
+            // Fetch stops and add them to the map
             console.log(data);
-        }).fail(function(){console.log('fail')});
+            $.each(data, function(key, stop){
+                $('.randomdiv').append(stop.fields.stop_lat);
+                $('.randomdiv').append(stop.fields.stop_lon);
+            });
+        });
     </script>
     <div class="randomdiv"></div>
     <a href="{% url 'easygrt.views.stopjson' %}">Link </a>

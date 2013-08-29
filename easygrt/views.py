@@ -12,7 +12,7 @@ def stopjson(request):
     if not bus_stop_list:
         raise Http404
     context = {'bus_stops': bus_stop_list, 'stop_id': 3700, 'bus_json': bus_json}
-    return render(request, 'easygrt/stopjson.html', context)
+    return HttpResponse(bus_json, content_type="application/json")
 
 def map(request):
     return render(request, 'easygrt/map.html')
