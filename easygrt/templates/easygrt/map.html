@@ -8,11 +8,10 @@
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBHyk1XXbAb_wovesF9e7mLcMx5_hTxcbU&sensor=true"></script>
     {% load staticfiles %}
     <script type="text/javascript" src="{% static "easygrt/js/gmap3.js" %}"></script>
-    <!--<script type="text/javascript" src="{% static "easygrt/js/map.js" %}"></script> -->
+    <script type="text/javascript" src="{% static "easygrt/js/map.js" %}"></script>
     <style type="text/css">
         body section {height: 100%; width: 100%;}
         #map-canvas {width: auto; height: 100%; }
-        /*{% url 'easygrt.views.stopjson' %}*/
     </style>
     {% endblock %} 
 
@@ -20,18 +19,27 @@
 {% endblock %} 
 
 {% block content %} 
-<div id="map-canvas"></div>
+    <div id="map-canvas"></div>
     <script>
-        $("#map-canvas").gmap3();   // Create the map
         $.getJSON("{% url 'easygrt.views.stopjson' %}", function(data){
             // Fetch stops and add them to the map
-            console.log(data);
+
+            var markerArray = [];
+            var latLngArray;
+            var marker;
             $.each(data, function(key, stop){
-                $('.randomdiv').append(stop.fields.stop_lat);
-                $('.randomdiv').append(stop.fields.stop_lon);
+                // Create objects like below, and put them in the array
+                // {latLng: [48.8620722, 2.352047]}
+                latLngArray = [stop.fields.stop_lat, stop.fields.stop_lon];
+                marker = {latLng: latLngArray};
+                markerArray.push(marker);
+            });
+            // Insert array of stops into map
+            $("#map-canvas").gmap3({
+                marker:{
+                    values: markerArray
+                }
             });
         });
     </script>
-    <div class="randomdiv"></div>
-    <a href="{% url 'easygrt.views.stopjson' %}">Link </a>
 {% endblock %} 

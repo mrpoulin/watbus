@@ -7,7 +7,7 @@ def favourites(request):
     return render(request, 'easygrt/index.html')
 
 def stopjson(request):
-    bus_stop_list = Stops.objects.filter(stop_name__contains='U.W')
+    bus_stop_list = Stops.objects.all();
     bus_json = serializers.serialize("json", bus_stop_list);
     if not bus_stop_list:
         raise Http404

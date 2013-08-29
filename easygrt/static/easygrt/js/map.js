@@ -8,12 +8,6 @@ var initialize = function(){
     // Defines the map. "gmap3" is the jQuery plugin for Google Maps
     $("#map-canvas").gmap3({
         map: mapOptions,
-        marker: {
-            latLng: [43.47273, -80.541218],
-            options:{
-                draggable: false
-            }
-        }
     });
 
 }
