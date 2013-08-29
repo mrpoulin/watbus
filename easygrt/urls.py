@@ -7,4 +7,5 @@ urlpatterns = patterns('',
         url(r'^favourites/$', views.favourites, name='favourites'),
         url(r'^map/$', views.map, name='map'),
         url(r'^browse/$', views.browse, name='browse'),
+        url(r'^stopjson$', views.stopjson, name='stopjson')
 )

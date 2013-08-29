@@ -11,10 +11,11 @@ var initialize = function(){
         marker: {
             latLng: [43.47273, -80.541218],
             options:{
-                draggable: true
+                draggable: false
             }
         }
     });
+
 }
 
 $(document).ready(initialize);

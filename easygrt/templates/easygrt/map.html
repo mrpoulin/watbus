@@ -1,20 +1,35 @@
-
 {% extends "easygrt/base.html" %}
-{% block title %} EasyGRT Map {% endblock %}
+{% block title %} 
+    EasyGRT Map
+{% endblock %}
 
 {% block headscripts %}
-<script type="text/javascript" src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBHyk1XXbAb_wovesF9e7mLcMx5_hTxcbU&sensor=true"></script>
-{% load staticfiles %}
-<script type="text/javascript" src="{% static "easygrt/js/gmap3.js" %}"></script>
-<script type="text/javascript" src="{% static "easygrt/js/map.js" %}"></script>
-<style type="text/css">
-    body section {height: 100%; width: 100%;}
-    #map-canvas {width: auto; height: 100%; }
-</style>
-{% endblock %} 
+    <script type="text/javascript" src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBHyk1XXbAb_wovesF9e7mLcMx5_hTxcbU&sensor=true"></script>
+    {% load staticfiles %}
+    <script type="text/javascript" src="{% static "easygrt/js/gmap3.js" %}"></script>
+    <!--<script type="text/javascript" src="{% static "easygrt/js/map.js" %}"></script> -->
+    <style type="text/css">
+        body section {height: 100%; width: 100%;}
+        #map-canvas {width: auto; height: 100%; }
+        /*{% url 'easygrt.views.stopjson' %}*/
+    </style>
+    {% endblock %} 
+
 {% block bodyattributes %}
 {% endblock %} 
+
 {% block content %} 
-    <div id="map-canvas"></div>
+<div id="map-canvas"></div>
+    <script>
+        $("#map-canvas").gmap3();
+        console.log('lol');
+        $.getJSON("{% url 'easygrt.views.stopjson' %}", function(data){
+            $('.randomdiv').html(data);
+            console.log('done');
+            console.log(data);
+        }).fail(function(){console.log('fail')});
+    </script>
+    <div class="randomdiv"></div>
+    <a href="{% url 'easygrt.views.stopjson' %}">Link </a>
 {% endblock %} 
