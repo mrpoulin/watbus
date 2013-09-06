@@ -1,3 +1,7 @@
+from django.shortcuts import render
+from django.core import serializers
+from django.http import HttpResponse
+from easygrt.models import Stops
 from django.shortcuts import render, redirect, get_list_or_404
 from django.http import HttpResponse, HttpResponseBadRequest, Http404
 from collections import defaultdict, OrderedDict
@@ -31,6 +35,14 @@ def search(request):
         return redirect('easygrt.views.browse_stops', stop_id=query)
     else:
         return HttpResponseBadRequest("No query entered")
+
+def stopjson(request):
+    bus_stop_list = Stops.objects.all();
+    bus_json = serializers.serialize("json", bus_stop_list);
+    if not bus_stop_list:
+        raise Http404
+    context = {'bus_stops': bus_stop_list, 'stop_id': 3700, 'bus_json': bus_json}
+    return HttpResponse(bus_json, content_type="application/json")
 
 def map(request):
     return render(request, 'easygrt/map.html')

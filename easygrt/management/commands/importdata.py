@@ -126,7 +126,6 @@ class Command(BaseCommand):
         with transaction.commit_on_success():
             with Routes.delayed as d:
                 for data in self._parse_csv(path, ','):
-                    data['route_id'] = int(data['route_id'])
                     d.insert(data)
 
     def _import_trips(self, path):
@@ -134,7 +133,6 @@ class Command(BaseCommand):
         with transaction.commit_on_success():
             with Trips.delayed as d: 
                 for data in self._parse_csv(path, ','):
-                    data['trip_id'] = int(data['trip_id'])
                     d.insert(data)
 
     def _import_stops(self, path):
@@ -151,7 +149,6 @@ class Command(BaseCommand):
         with transaction.commit_on_success():
             with StopTimes.delayed as d:
                 for data in self._parse_csv(path, ','):
-                        data['trip_id'] = int(data['trip_id'])
                         data['arrival_time'] = self._convert_time(data['arrival_time']).__str__()
                         data['departure_time'] = self._convert_time(data['departure_time']).__str__()
                         data['stop_sequence'] = int(data['stop_sequence'])

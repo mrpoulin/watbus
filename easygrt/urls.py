@@ -10,4 +10,5 @@ urlpatterns = patterns('',
         url(r'^browse/$', views.browse, name='browse'),
         url(r'^browse/stops/(?P<stop_id>.+)/$', views.browse_stops, name='browse_stops'),
         url(r'^browse/trips/(?P<trip_id>.+)/$', views.browse_trips, name='browse_trips'),
+        url(r'^stopjson$', views.stopjson, name='stopjson')
 )

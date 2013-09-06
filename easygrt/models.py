@@ -7,7 +7,7 @@ from django.db import models
 #See https://docs.djangoproject.com/en/dev/topics/db/models/
 #See also https://docs.djangoproject.com/en/dev/ref/models/fields/
 class Calendar(models.Model):
-    service_id = models.CharField(primary_key = True, max_length = 5)
+    service_id = models.CharField(primary_key = True, max_length = 60)
     monday = models.BooleanField()
     tuesday =  models.BooleanField()
     wednesday = models.BooleanField()
@@ -31,7 +31,7 @@ class CalendarDates(models.Model):
         return "{0}:{1}".format(self.service_id, self.date)
     
 class Routes(models.Model):
-    route_id = models.IntegerField(primary_key = True, unique = True)
+    route_id = models.CharField(primary_key = True, unique = True, max_length = 60)
     route_long_name = models.CharField(max_length = 60)
 
     def __unicode__(self):
@@ -40,7 +40,7 @@ class Routes(models.Model):
 class Trips(models.Model):
     route_id = models.ForeignKey(Routes, db_column='route_id')
     service_id = models.ForeignKey(Calendar, db_column='service_id')
-    trip_id = models.IntegerField(primary_key = True, unique = True)
+    trip_id = models.CharField(primary_key = True, unique = True, max_length = 60)
     trip_headsign = models.CharField(max_length = 50)
 
     def __unicode__(self):
