@@ -3,3 +3,4 @@
 easygrt/data/
 *.sqlite3
 *.DS_Store
+*.swp

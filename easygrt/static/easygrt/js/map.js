@@ -20,33 +20,33 @@ var initialize = function(){
 		mapTypeId: google.maps.MapTypeId.ROADMAP
 	}};
 
-
     // Defines the map. "gmap3" is the jQuery plugin for Google Maps
     $("#map-canvas").gmap3({
         map: mapOptions,
     });
 
-    $.getJSON("{% url 'easygrt.views.stopjson' %}", function(data){
-        // Fetch stops and add them to the map
-
-        var markerArray = [];
-        var latLngArray;
-        var marker;
-        $.each(data, function(key, stop){
-            // Create objects like below, and put them in the array
-            // {latLng: [48.8620722, 2.352047]}
-            latLngArray = [stop.fields.stop_lat, stop.fields.stop_lon];
-            marker = {latLng: latLngArray};
-            markerArray.push(marker);
-        });
-        // Insert array of stops into map
-        $("#map-canvas").gmap3({
-            marker:{
-                values: markerArray
-            }
-        });
-    });
     getUserLocation();
+}
+
+function addMarkers(data){
+    // Fetch stops and add them to the map
+
+    var markerArray = [];
+    var latLngArray;
+    var marker;
+    $.each(data, function(key, stop){
+        // Create objects like below, and put them in the array
+        // {latLng: [48.8620722, 2.352047]}
+        latLngArray = [stop.fields.stop_lat, stop.fields.stop_lon];
+        marker = {latLng: latLngArray};
+        markerArray.push(marker);
+    });
+    // Insert array of stops into map
+    $("#map-canvas").gmap3({
+        marker:{
+            values: markerArray
+        }
+    });
 }
 
 $(document).ready(initialize);

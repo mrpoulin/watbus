@@ -20,4 +20,7 @@
 
 {% block content %} 
     <div id="map-canvas"></div>
+    <script>
+    $.getJSON("{% url 'easygrt.views.stopjson' %}", addMarkers);
+    </script>
 {% endblock %} 
