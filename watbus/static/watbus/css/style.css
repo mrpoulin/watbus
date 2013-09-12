@@ -4,8 +4,7 @@ body { background: #000000; padding: 0; margin: 0; height: 100%; }
 
 a {text-decoration: none; color: #178899; }
 
-.container {width: 480px; margin: 0 auto; color: #ffffff; font: 12pt roboto; background: url('../img/bg.png'); min-height: 100%; height: 100%; 
-}
+.container {width: 480px; margin: 0 auto; color: #ffffff; font: 12pt roboto; background: url('../img/bg.png'); min-height: 100%; }
 
 /* ----  Header ---- */
 
@@ -60,8 +59,22 @@ a {text-decoration: none; color: #178899; }
 
 /* ---- Bus List  ---- */
 
+.pagetitle { padding: 10px 5px 10px 5px; font: 24px Helvetica; 
+    margin: 0; text-align: center; }
+
+ul.stoplist {padding: 10px 0 0 0px; margin: 0; list-style: none;}
+li.stoplist_bus a {background: #000000; display: block; 
+    padding: 6px 10px 6px 10px; font: 24px Helvetica;  }
+
+ul.sublist { padding: 0; margin: 0;}
+li.sublist_time {list-style: none; border-bottom: 1px solid #555555;
+    padding: 5px 5px 5px 50px; }
+a.busname {}
+
+ul.triplist {padding: 0 0 20px 0; margin: 0; list-style: none; }
+li.triplist_trip {border-bottom: 1px solid #555555; background: #000000;
+    padding: 5px; margin: 0; }
 
 /* Footer */
 
-#contentfoot {font-size: 9pt; padding: 10px; bottom: 0; background: #000000; text-align: center; 
-    height: 60px; position: fixed; bottom: 0; width: 480px;}
+#contentfoot {font-size: 9pt; padding: 10px; bottom: 0; background: #000000; text-align: center; }

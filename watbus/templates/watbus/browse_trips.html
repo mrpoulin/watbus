@@ -3,15 +3,16 @@
 {% block title %} Watbus - Trip: {{ next_buses_by_stop.0.trip_id.trip_headsign }}  {% endblock %}
 
 {% block content %} 
+<h2 class='pagetitle'> {{ next_buses_by_stop.0.trip_id.trip_headsign }} </h2>
+  <ul class="triplist">
   {% for bus in next_buses_by_stop %}
-    <ul>
-      <li class='t_listhead' onclick='location.href="{% url 'watbus.views.browse_stops' bus.stop_id.stop_id %}"'>
-        <span class='t_time'> {{ bus.arrival_time }} </span>
-        <span class='t_stopid'> {{ bus.stop_id.stop_id }} </span>
-        <span class='t_stopname'> {{ bus.stop_id.stop_name }} </span>
-        <span class='t_headsign'> {{ bus.trip_id.trip_headsign }} </span>
+      <li class='triplist_trip'>
+      <span class="time"> {{ bus.arrival_time }} </span> &mdash;
+          <a href="{% url 'watbus.views.browse_stops' bus.stop_id.stop_id %}">
+            <span class="stopid"> {{ bus.stop_id.stop_id }} </span>
+            <span class="stopname"> {{ bus.stop_id.stop_name }} </span>
+          </a>
       </li>
   {% endfor %}
-</ul>
-
+  </ul>
 {% endblock %}

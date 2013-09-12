@@ -5,17 +5,19 @@
     <meta charset="utf-8" />
     <title>{% block title %} EasyGRT {% endblock %} </title>
     {% load staticfiles %}
-    <link rel="stylesheet" type="text/css" href="{% static "watbus/css/style.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "watbus/css/style.css" %}" />
     {% block headscripts %} {% endblock %}
   </head>
 
   <body {% block bodyattributes %}{% endblock %}> 
     <div class="container">
-        <header class="top">
-        <div class="header"><a href="/"><img src="{% static "watbus/img/header.png" %}" /></a>
+        <header class="contentheader">
+        <div class="headerimg">
+            <a href="/">
+                <img src="{% static "watbus/img/header.png" %}" />
+            </a>
         </div>
-
-      <div class="nav">
+        <nav class="navigation">
         <ul>
             <li class="navitem {% if urlname == "map" %}current{% endif %}">
             <a href={% url 'watbus.views.map' %}>MAP</a></li>
@@ -24,22 +26,22 @@
             <li class="navitem {% if urlname == "browse" %}current{% endif %}">
             <a href={% url 'watbus.views.browse' %}>BROWSE</a></li>
         </ul>
-      </div>
-      <div class="stop_search">
-        <form action={% url 'watbus.views.search' %} method="get">
-          <input type="text" name="query">
-          <input type="submit" value="Search">
-      </div>
+        </nav>
+          <div class="stop_search">
+            <form action={% url 'watbus.views.search' %} method="get">
+              <input type="text" name="query">
+              <input type="submit" value="Search">
+          </div>
       <div class=clear></div>
-      <div class="content">
       </header>
 
-    <div class=clear></div>
     <section id="content">
         {% block content %} {% endblock %}
     </section>
     <footer id="contentfoot">
-    EasyGRT &copy; 2013 Marc Poulin and Holly Xu. We are not associated with <a href="http://grt.ca/">Grand River Transit</a>.
+    Disclaimer: This is only a bus schedule. It is not real time data.<br/>
+    We are not associated with <a href="http://grt.ca/">Grand River Transit</a>. <br />
+    WatBus &copy; 2013 <a href="https://github.com/mrpoulin">Marc Poulin</a> and <a href="https://github.com/hollyxu">Holly Xu</a>.
     </footer>
     </div>
   </body>
