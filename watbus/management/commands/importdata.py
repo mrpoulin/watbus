@@ -2,7 +2,7 @@ from django.core.management.base import BaseCommand, CommandError
 import os.path
 from sys import stdout
 from datetime import time, date
-from easygrt.models import *
+from watbus.models import *
 from django.db import transaction
 import dse
 

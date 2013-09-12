@@ -10,7 +10,7 @@
 # Arguments:
 # Pass the -c parameter to clean and resync the db only.
 # Pass -i parameter to only clean db & import data (no download)
-# Pass the -f parameter to choose an alternate location for data files. Default is ./easygrt/data
+# Pass the -f parameter to choose an alternate location for data files. Default is ./watbus/data
 #
 # Logging:
 # Output is sent to stdout (since the script completes quickly).
@@ -24,7 +24,7 @@ defaults() {
 
   clean_only="NO"
   import_only="NO"
-  gtfs_data_path="./easygrt/data"
+  gtfs_data_path="./watbus/data"
 
 }
 
@@ -37,7 +37,7 @@ run_python() {
   fi
 
   echo "Clearing DB" 
-  python manage.py sqlclear easygrt | python manage.py dbshell
+  python manage.py sqlclear watbus | python manage.py dbshell
   echo "Re-syncing DB" 
   python manage.py syncdb 
 

@@ -1,12 +1,12 @@
-{% extends "easygrt/base.html" %}
+{% extends "watbus/base.html" %}
 
-{% block title %} EasyGrt - Stop:  {{ stop_id }} {% endblock %}
+{% block title %} Watbus - Stop:  {{ stop_id }} {% endblock %}
 
 {% block content %} 
 
   {% for route,buses in next_buses_by_route %}
     <ul>
-      <li class='s_listhead' onclick='location.href="{% url 'easygrt.views.browse_trips' buses.0.trip_id.trip_id %}"'> 
+      <li class='s_listhead' onclick='location.href="{% url 'watbus.views.browse_trips' buses.0.trip_id.trip_id %}"'> 
         <span class='s_time'> {{ buses.0.arrival_time }} </span>
         <span class='s_route'> {{ route }} </span>
         <span class='s_routename'> {{ buses.0.trip_id.route_id.route_long_name }} </span>

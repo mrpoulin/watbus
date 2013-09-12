@@ -30,7 +30,6 @@ var initialize = function(){
 
 function addMarkers(data){
     // Fetch stops and add them to the map
-
     var markerArray = [];
     var latLngArray;
     var marker;

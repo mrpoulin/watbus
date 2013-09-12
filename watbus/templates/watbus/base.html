@@ -5,28 +5,28 @@
     <meta charset="utf-8" />
     <title>{% block title %} EasyGRT {% endblock %} </title>
     {% load staticfiles %}
-    <link rel="stylesheet" type="text/css" href="{% static "easygrt/css/style.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "watbus/css/style.css" %}">
     {% block headscripts %} {% endblock %}
   </head>
 
   <body {% block bodyattributes %}{% endblock %}> 
     <div class="container">
         <header class="top">
-        <div class="header"><a href="/"><img src="{% static "easygrt/img/header.png" %}" /></a>
+        <div class="header"><a href="/"><img src="{% static "watbus/img/header.png" %}" /></a>
         </div>
 
       <div class="nav">
         <ul>
             <li class="navitem {% if urlname == "map" %}current{% endif %}">
-            <a href={% url 'easygrt.views.map' %}>MAP</a></li>
+            <a href={% url 'watbus.views.map' %}>MAP</a></li>
             <li class="navitem {% if urlname == "favourites" %}current{% endif %}">
-            <a href={% url 'easygrt.views.favourites' %}>FAVOURITES</a></li>
+            <a href={% url 'watbus.views.favourites' %}>FAVOURITES</a></li>
             <li class="navitem {% if urlname == "browse" %}current{% endif %}">
-            <a href={% url 'easygrt.views.browse' %}>BROWSE</a></li>
+            <a href={% url 'watbus.views.browse' %}>BROWSE</a></li>
         </ul>
       </div>
       <div class="stop_search">
-        <form action={% url 'easygrt.views.search' %} method="get">
+        <form action={% url 'watbus.views.search' %} method="get">
           <input type="text" name="query">
           <input type="submit" value="Search">
       </div>

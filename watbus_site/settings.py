@@ -1,5 +1,5 @@
 """
-Django settings for easygrt_site project.
+Django settings for watbus_site project.
 
 For more information on this file, see
 https://docs.djangoproject.com/en/dev/topics/settings/
@@ -36,7 +36,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'easygrt',
+    'watbus',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -48,9 +48,9 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-ROOT_URLCONF = 'easygrt_site.urls'
+ROOT_URLCONF = 'watbus_site.urls'
 
-WSGI_APPLICATION = 'easygrt_site.wsgi.application'
+WSGI_APPLICATION = 'watbus_site.wsgi.application'
 
 TEMPLATE_CONTEXT_PROCESSORS = (
         "django.contrib.auth.context_processors.auth",
@@ -60,7 +60,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
         "django.core.context_processors.static",
         "django.core.context_processors.tz",
         "django.contrib.messages.context_processors.messages",
-        "easygrt.processor.context_processor.resolve_urlname",
+        "watbus.processor.context_processor.resolve_urlname",
 )
 
 # Database

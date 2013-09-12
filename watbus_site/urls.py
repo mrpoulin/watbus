@@ -5,10 +5,9 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     # Examples:
-    # url(r'^$', 'easygrt_site.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
 
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^easygrt/', include('easygrt.urls')),
-    url(r'^$', include('easygrt.urls')),
+    url(r'^watbus/', include('watbus.urls')),
+    url(r'^$', include('watbus.urls')),
 )

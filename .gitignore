@@ -1,6 +1,6 @@
 *.pyc
 *.*~
-easygrt/data/
+watbus/data/
 *.sqlite3
 *.DS_Store
 *.swp

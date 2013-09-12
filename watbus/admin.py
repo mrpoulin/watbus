@@ -1,9 +1,9 @@
 from django.contrib import admin
-from easygrt.models import Routes
-from easygrt.models import Calendar
-from easygrt.models import CalendarDates
-from easygrt.models import Trips
-from easygrt.models import Stops
+from watbus.models import Routes
+from watbus.models import Calendar
+from watbus.models import CalendarDates
+from watbus.models import Trips
+from watbus.models import Stops
 
 # Register your models here.
 admin.site.register(Routes)

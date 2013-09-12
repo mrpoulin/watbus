@@ -1,12 +1,10 @@
 from django.shortcuts import render
 from django.core import serializers
-from django.http import HttpResponse
-from easygrt.models import Stops
 from django.shortcuts import render, redirect, get_list_or_404
 from django.http import HttpResponse, HttpResponseBadRequest, Http404
 from collections import defaultdict, OrderedDict
 from datetime import date, time, datetime
-from easygrt.models import StopTimes
+from watbus.models import StopTimes, Stops
 import re
 
 def __getWeekdayString(weekday):
@@ -24,7 +22,7 @@ def __getWeekdayString(weekday):
             }.get(weekday, 'monday')
 
 def favourites(request):
-    return render(request, 'easygrt/index.html')
+    return render(request, 'watbus/index.html')
 
 def search(request):
 
@@ -32,7 +30,7 @@ def search(request):
         query = request.GET['query'].strip()
         if not re.match(r'\d+', query):
             return HttpResponseBadRequest("Stop id must only contain numbers")
-        return redirect('easygrt.views.browse_stops', stop_id=query)
+        return redirect('watbus.views.browse_stops', stop_id=query)
     else:
         return HttpResponseBadRequest("No query entered")
 
@@ -45,11 +43,11 @@ def stopjson(request):
     return HttpResponse(bus_json, content_type="application/json")
 
 def map(request):
-    return render(request, 'easygrt/map.html')
+    return render(request, 'watbus/map.html')
 
 #Display generic landing page.
 def browse(request):
-    return render(request, 'easygrt/browse.html')
+    return render(request, 'watbus/browse.html')
 
 def browse_stops(request, stop_id):
 
@@ -85,7 +83,7 @@ def browse_stops(request, stop_id):
             grouped[route_id].append(bus)
 
     context = { 'next_buses_by_route' : grouped.iteritems(), 'stop_id' : stop_id }
-    return render(request, 'easygrt/browse_stops.html', context)
+    return render(request, 'watbus/browse_stops.html', context)
 
 def browse_trips(request, trip_id):
 
@@ -113,4 +111,4 @@ def browse_trips(request, trip_id):
     )
 
     context = {'next_buses_by_stop' : next_bus_list, 'trip_id' : trip_id }
-    return render(request, 'easygrt/browse_trips.html', context)
+    return render(request, 'watbus/browse_trips.html', context)

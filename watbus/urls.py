@@ -1,9 +1,9 @@
 from django.conf.urls import patterns, url
-from django.views.generic import RedirectView
-from easygrt import views
+from django.views.generic.base import RedirectView
+from watbus import views
 
 urlpatterns = patterns('',
-        url(r'^$', RedirectView.as_view(url='/easygrt/favourites/')),
+        url(r'^$', RedirectView.as_view(url='/watbus/favourites')),
         url(r'^search/', views.search, name='search'),
         url(r'^favourites/$', views.favourites, name='favourites'),
         url(r'^map/$', views.map, name='map'),

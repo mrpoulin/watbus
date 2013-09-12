@@ -30,15 +30,3 @@ class Command(BaseCommand):
         #Load zipfile into memory (StringIO) and extract to disk
         zipfile = ZipFile(StringIO(response.read()))
         zipfile.extractall(args[0])
-
-        #Read each extracted file and perform necessary adjustments.
-        '''
-        for filename in os.listdir(args[0]):
-
-            base_filename = os.path.splittext(filename)[0])
-
-            if(base_filename == 'calendar' or base_filename == 'caldenar_dates'):
-                with open(filename, 'r+') as f:
-                    src_lines = f.readLines()
-
-        '''

@@ -1,11 +1,11 @@
-{% extends "easygrt/base.html" %}
+{% extends "watbus/base.html" %}
 
-{% block title %} EasyGrt - Trip: {{ next_buses_by_stop.0.trip_id.trip_headsign }}  {% endblock %}
+{% block title %} Watbus - Trip: {{ next_buses_by_stop.0.trip_id.trip_headsign }}  {% endblock %}
 
 {% block content %} 
   {% for bus in next_buses_by_stop %}
     <ul>
-      <li class='t_listhead' onclick='location.href="{% url 'easygrt.views.browse_stops' bus.stop_id.stop_id %}"'>
+      <li class='t_listhead' onclick='location.href="{% url 'watbus.views.browse_stops' bus.stop_id.stop_id %}"'>
         <span class='t_time'> {{ bus.arrival_time }} </span>
         <span class='t_stopid'> {{ bus.stop_id.stop_id }} </span>
         <span class='t_stopname'> {{ bus.stop_id.stop_name }} </span>
