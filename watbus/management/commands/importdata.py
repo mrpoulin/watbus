@@ -21,7 +21,6 @@ class Command(BaseCommand):
 
 
     help = "Supply path to data files as only argument"
-    
 
     #Method that is called when 'python manage.py importdata' is executed.
     def handle(self, *args, **options):
@@ -68,7 +67,7 @@ class Command(BaseCommand):
                 stdout.write("\r{0} ..................... {1!s}".format(fpath, curr_line))
                 stdout.flush()
 
-                row_values = [s.strip() for s in row.split(separator)]
+                row_values = [s.strip("\n\t\"\'") for s in row.split(separator)]
 
                 if not row_values or len(row_values) != len(headers):
                     raise CsvReadError(curr_line, "Line not parsed correctly")
