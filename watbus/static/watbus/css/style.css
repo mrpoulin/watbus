@@ -1,16 +1,18 @@
 /* ---- General ---- */
 html {height: 100%;}
-body { background: #000000; padding: 0; margin: 0; height: 100% ;}
+body { background: #000000; padding: 0; margin: 0; height: 100%; }
 
 a {text-decoration: none; color: #178899; }
 
+.container {width: 480px; margin: 0 auto; color: #ffffff; font: 12pt roboto; background: url('../img/bg.png'); min-height: 100%; height: 100%; 
+}
+
 /* ----  Header ---- */
 
-.container {width: 480px; margin: 0 auto; color: #ffffff; font: 12pt roboto; background: url('../img/bg.png'); height: 100%;}
-.header {padding: 30px 0 30px 0; text-align: center;}
+.headerimg {padding: 30px 0 30px 0; text-align: center;}
 
-.nav {background: #000000; text-align: center; padding: 0; margin: 0; }
-.nav ul {margin: 0; padding: 0;}
+.navigation {background: #000000; text-align: center; padding: 0; margin: 0; }
+.navigation ul {margin: 0; padding: 0;}
 .navitem { display: inline-block; width: 30%; text-align: center; margin: 0; padding: 5px 0 5px 0; list-style: none; font-size: 10pt; }
 .navitem a {color: #454545;}
 .current a{color: #878787;}
@@ -21,9 +23,7 @@ a {text-decoration: none; color: #178899; }
 
 .stop_search {
   background: #0097AB url('../img/titlegrad.png') repeat-x;
-  font: 18pt helvetica;
-  font-weight: lighter;
-  padding: 10px;
+  font: 18pt helvetica; font-weight: lighter; padding: 10px;
 }
 
 
@@ -60,94 +60,8 @@ a {text-decoration: none; color: #178899; }
 
 /* ---- Bus List  ---- */
 
-.content ul 
-{ 
-  list-style-type: none;
-  width: 100%;
-  padding: 0px;
-  margin: 0px;
-}
-
-.content ul li
-{
-  overflow: hidden;
-}
-
-.content li span
-{
-  display:block;
-}
-
-.s_listhead, .t_listhead
-{
-  background: #3a3a3a url('../img/itemgrad.png') repeat-x;
-  height: 70px;
-}
-
-.s_sublist
-{
-  height: 40px;
-  margin: 0 0 0 30px;
-}
-
-.s_time, .t_time
-{
-  color: #178899;
-	font: 20pt helvetica;
-	font-weight: lighter;
-  float: left;
-}
-
-.s_route, .s_routename, .t_stopid, .t_stopname
-{
-  color: #ffffff;
-  float: right;
-  padding: 3px;
-  font: bold 16pt helvetica;
-}
-
-.s_headsign, .t_headsign
-{
-	color: #dddddd;
-	font: 12pt helvetica;
-  float: right;
-  clear: both;
-	font-weight: lighter;
-} 
-
-.lineitem tr{
-    background: url('../img/itemgrad.png') repeat-x;
-    height: 66px;
-}
-
-.l_time {
-    color: #178899;
-    font: 22pt helvetica;
-    font-weight: lighter;
-    float: left;
-    padding: 10px 0 10px 10px;
-    vertical-align: middle;
-}
-
-.l_name {
-    width: 100%;
-    color: #dddddd;
-    font: 14pt helvetica;
-    font-weight: lighter;
-    float: left;
-    padding: 10px 0 10px 12px;
-    vertical-align: middle;
-}
-
-.l_route {
-    color: #ffffff;
-    font: 22pt helvetica;
-    font-weight: bold;
-    padding: 0 16px 0 0;
-    float: right;
-    vertical-align: middle;
-}
 
 /* Footer */
 
-#contentfoot {font-size: 9pt; padding: 10px; display: none; }
+#contentfoot {font-size: 9pt; padding: 10px; bottom: 0; background: #000000; text-align: center; 
+    height: 60px; position: fixed; bottom: 0; width: 480px;}
