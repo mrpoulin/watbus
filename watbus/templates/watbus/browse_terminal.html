@@ -1,0 +1,15 @@
+{% extends "watbus/base.html" %}
+{% block title %} Watbus - Terminal:  {{ terminal_name }} {% endblock %}
+
+{% block content %} 
+
+  <h1> {{ terminal_name }} </h1>
+
+  {% for stop_id, buses in stops %}
+    <h3> {{ stop_id }} </h3>
+    {% include 'watbus/buses_by_route.html' with next_buses_by_time=buses %}
+  {% endfor %}
+
+{% endblock %}
+
+

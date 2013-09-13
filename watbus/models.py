@@ -51,9 +51,11 @@ class Stops(models.Model):
     stop_name = models.CharField(max_length = 50)
     stop_lat = models.DecimalField(max_digits = 8, decimal_places = 6)
     stop_lon = models.DecimalField(max_digits = 8, decimal_places = 6)
+    location_type = models.BooleanField()
+    parent_station = models.CharField(max_length = 15)
 
     def __unicode__(self):
-        return "{0}:{1}".format(self.stop_id, self.stop_name)
+        return "{0}:{1} PART OF {2}".format(self.stop_id, self.stop_name, self.parent_station)
     
 class StopTimes(models.Model):
     trip_id = models.ForeignKey(Trips, db_column='trip_id')

@@ -1,9 +1,9 @@
-from django.shortcuts import render
 from django.core import serializers
-from django.shortcuts import render, redirect, get_list_or_404
+from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseBadRequest, Http404
 from collections import defaultdict, OrderedDict
-from datetime import date, time, datetime
+import datetime
+import time
 from watbus.models import StopTimes, Stops
 import re
 
@@ -21,8 +21,6 @@ def __getWeekdayString(weekday):
 
             }.get(weekday, 'monday')
 
-def favourites(request):
-    return render(request, 'watbus/index.html')
 
 def search(request):
 
@@ -49,20 +47,22 @@ def map(request):
 def browse(request):
     return render(request, 'watbus/browse.html')
 
-def browse_stops(request, stop_id):
+#Returns a dictionary of the next buses coming to a stop orderd by arrival time.
+def next_buses_by_time(time, stop_id):
 
-    curr_time = datetime.time(datetime.now())
-    curr_day = date.today()
-    day_selector_keyword = 'trip_id__service_id__' + __getWeekdayString(datetime.today().weekday())
+    curr_day = datetime.date.today()
+    day_selector_keyword = 'trip_id__service_id__' + __getWeekdayString(datetime.datetime.today().weekday())
 
+    #If invalid stop is returned.
     next_bus_list = StopTimes.objects.filter(stop_id=stop_id)
     if not next_bus_list:
         raise Http404
 
+    #Will return buses on ALL routes coming to a given stop, ordered by arrival time.
     next_bus_list = next_bus_list.select_related(
             'trip_id'
     ).filter(
-            arrival_time__gte=curr_time
+            arrival_time__gte=time
     ).filter(
             trip_id__service_id__start_date__lte=curr_day
     ).filter(
@@ -70,31 +70,28 @@ def browse_stops(request, stop_id):
     ).filter(
             **{ day_selector_keyword : 1 }
     ).order_by(
-            'arrival_time'
+            'trip_id__trip_headsign', 'arrival_time'
     )
     
-    grouped = OrderedDict()
+    return next_bus_list
 
-    for bus in next_bus_list:
-        route_id = bus.trip_id.route_id.route_id
-        if route_id not in grouped:
-            grouped[route_id] = [bus]
-        else:
-            grouped[route_id].append(bus)
+def browse_stops(request, stop_id):
 
-    context = { 'next_buses_by_route' : grouped.iteritems(), 'stop_id' : stop_id }
+    curr_time = datetime.datetime.now()
+    next_bus_list = next_buses_by_time(curr_time, stop_id)
+
+    context = { 'next_buses_by_time' : next_bus_list, 'stop_id' : stop_id }
     return render(request, 'watbus/browse_stops.html', context)
 
 def browse_trips(request, trip_id):
 
-    curr_time = datetime.now();
-    curr_day = date.today();
-    day_selector_keyword = 'trip_id__service_id__' + __getWeekdayString(datetime.today().weekday())
+    curr_time = datetime.datetime.now();
+    curr_day = datetime.date.today();
+    day_selector_keyword = 'trip_id__service_id__' + __getWeekdayString(datetime.datetime.today().weekday())
 
     next_bus_list = StopTimes.objects.filter(trip_id=trip_id)
     if not next_bus_list:
         raise Http404
-
     
     next_bus_list = next_bus_list.select_related(
             'trip_id'
@@ -109,6 +106,26 @@ def browse_trips(request, trip_id):
     ).order_by(
             'stop_sequence'
     )
-
     context = {'next_buses_by_stop' : next_bus_list, 'trip_id' : trip_id }
     return render(request, 'watbus/browse_trips.html', context)
+
+def browse_all_terminals(request):
+
+    pois = Stops.objects.filter(location_type=1).values_list('stop_id', 'stop_name')
+    return render(request, 'watbus/browse_all_terminals.html', { 'pois' : pois })
+
+def browse_terminal(request, terminal_id):
+
+    #Get all stops that have the given terminal ID
+    terminal_stops = Stops.objects.filter(parent_station=terminal_id)
+    if not terminal_stops:
+        raise Http404
+    
+    stop_dict = {}
+    for stop in terminal_stops:
+        stopid = stop.stop_id
+        stop_dict[stopid] = next_buses_by_time(datetime.datetime.now(), stopid)
+
+    print stop_dict
+    
+    return render(request, 'watbus/browse_terminal.html', { 'terminal_name' : terminal_stops[0].stop_name , 'stops' : stop_dict.iteritems() })

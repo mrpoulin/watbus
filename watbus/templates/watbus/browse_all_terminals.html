@@ -1,0 +1,14 @@
+{% extends "watbus/base.html" %}
+{% block title %} Watbus - Terminals {% endblock %}
+
+{% block content %} 
+
+  <ul>
+    {% for points in pois %}
+    <li> <a href="{% url 'watbus.views.browse_terminal' points.0 %}"> {{ points.1 }} </a></li>
+    {% endfor %}
+  </ul>
+
+{% endblock %}
+
+

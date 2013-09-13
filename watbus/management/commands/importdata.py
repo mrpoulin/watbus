@@ -67,7 +67,7 @@ class Command(BaseCommand):
                 stdout.write("\r{0} ..................... {1!s}".format(fpath, curr_line))
                 stdout.flush()
 
-                row_values = [s.strip("\n\t\"\'") for s in row.split(separator)]
+                row_values = [s.strip("\n\t\"\'\r ") for s in row.split(separator)]
 
                 if not row_values or len(row_values) != len(headers):
                     raise CsvReadError(curr_line, "Line not parsed correctly")
@@ -141,6 +141,7 @@ class Command(BaseCommand):
                 for data in self._parse_csv(path, ','):
                     data['stop_lat'] = float(data['stop_lat'])
                     data['stop_lon'] = float(data['stop_lon'])
+
                     d.insert(data)
 
     def _import_stop_times(self, path):

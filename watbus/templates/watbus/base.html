@@ -3,13 +3,14 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>{% block title %} EasyGRT {% endblock %} </title>
+    <title>{% block title %} Watbus {% endblock %} </title>
     {% load staticfiles %}
     <link rel="stylesheet" type="text/css" href="{% static "watbus/css/style.css" %}" />
     {% block headscripts %} {% endblock %}
   </head>
 
   <body {% block bodyattributes %}{% endblock %}> 
+    {{ urlname }}
     <div class="container">
         <header class="contentheader">
         <div class="headerimg">
@@ -21,8 +22,8 @@
         <ul>
             <li class="navitem {% if urlname == "map" %}current{% endif %}">
             <a href={% url 'watbus.views.map' %}>MAP</a></li>
-            <li class="navitem {% if urlname == "favourites" %}current{% endif %}">
-            <a href={% url 'watbus.views.favourites' %}>FAVOURITES</a></li>
+            <li class="navitem {% if urlname == "terminals" %}current{% endif %}">
+            <a href={% url 'watbus.views.browse_all_terminals' %}>TERMINALS</a></li>
             <li class="navitem {% if urlname == "browse" %}current{% endif %}">
             <a href={% url 'watbus.views.browse' %}>BROWSE</a></li>
         </ul>
