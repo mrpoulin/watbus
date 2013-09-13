@@ -1,5 +1,6 @@
 from django.core import serializers
 from django.shortcuts import render, redirect
+from django.core.urlresolvers import reverse
 from django.http import HttpResponse, HttpResponseBadRequest, Http404
 from collections import defaultdict, OrderedDict
 import datetime
@@ -28,7 +29,13 @@ def search(request):
         query = request.GET['query'].strip()
         if not re.match(r'\d+', query):
             return HttpResponseBadRequest("Stop id must only contain numbers")
-        return redirect('watbus.views.browse_stops', stop_id=query)
+        
+        #redirect to terminal if stop is part of terminal.
+        stop = Stops.objects.get(stop_id=query)
+        if stop.parent_station:
+            return redirect(reverse('watbus.views.browse_terminal', kwargs={'terminal_id':stop.parent_station}) + '#stop_' + str(stop.stop_id))
+        else:
+            return redirect('watbus.views.browse_stops', stop_id=query)
     else:
         return HttpResponseBadRequest("No query entered")
 
@@ -126,6 +133,4 @@ def browse_terminal(request, terminal_id):
         stopid = stop.stop_id
         stop_dict[stopid] = next_buses_by_time(datetime.datetime.now(), stopid)
 
-    print stop_dict
-    
     return render(request, 'watbus/browse_terminal.html', { 'terminal_name' : terminal_stops[0].stop_name , 'stops' : stop_dict.iteritems() })
