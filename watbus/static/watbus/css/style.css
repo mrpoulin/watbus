@@ -5,6 +5,7 @@ body { background: #000000; padding: 0; margin: 0; height: 100%; }
 a {text-decoration: none; color: #178899; }
 
 .container {width: 480px; margin: 0 auto; color: #ffffff; font: 12pt roboto; background: url('../img/bg.png'); min-height: 100%; }
+body.map .container { height: 100%; }
 
 /* ----  Header ---- */
 
@@ -61,6 +62,10 @@ a {text-decoration: none; color: #178899; }
 
 .pagetitle { padding: 10px 5px 10px 5px; font: 24px Helvetica; 
     margin: 0; text-align: center; }
+.pagesubtitle { font: 16px Helvetica; text-transform: uppercase; 
+    text-align: center; margin: 10px 0 0 0; letter-spacing: 2px;}
+
+/* -> Browse by Stops */
 
 ul.stoplist {padding: 10px 0 0 0px; margin: 0; list-style: none;}
 li.stoplist_bus a {background: #000000; display: block; 
@@ -71,9 +76,16 @@ li.sublist_time {list-style: none; border-bottom: 1px solid #555555;
     padding: 5px 5px 5px 50px; }
 a.busname {}
 
+/* -> Browse by Trips */
+
 ul.triplist {padding: 0 0 20px 0; margin: 0; list-style: none; }
 li.triplist_trip {border-bottom: 1px solid #555555; background: #000000;
     padding: 5px; margin: 0; }
+
+/* -> Browse by Terminals */
+
+ul.terminallist {padding: 0 0 20px 0; margin: 0; list-style: none; }
+li.terminallist_terminal { border-bottom: 1px solid #555555; background: #000000; padding: 5px; margin: 0; }
 
 /* Footer */
 

@@ -2,10 +2,10 @@
 {% block title %} Watbus - Terminals {% endblock %}
 
 {% block content %} 
-
-  <ul>
+  <h2 class="pagetitle">Points of Interest</h2>
+  <ul class="terminallist">
     {% for points in pois %}
-    <li> <a href="{% url 'watbus.views.browse_terminal' points.0 %}"> {{ points.1 }} </a></li>
+    <li class="terminallist_terminal"><a href="{% url 'watbus.views.browse_terminal' points.0 %}"> {{ points.1 }} </a></li>
     {% endfor %}
   </ul>
 

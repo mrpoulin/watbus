@@ -9,8 +9,7 @@
     {% block headscripts %} {% endblock %}
   </head>
 
-  <body {% block bodyattributes %}{% endblock %}> 
-    {{ urlname }}
+  <body class="{{ urlname }}"> 
     <div class="container">
         <header class="contentheader">
         <div class="headerimg">
@@ -23,7 +22,7 @@
             <li class="navitem {% if urlname == "map" %}current{% endif %}">
             <a href={% url 'watbus.views.map' %}>MAP</a></li>
             <li class="navitem {% if urlname == "terminals" %}current{% endif %}">
-            <a href={% url 'watbus.views.browse_all_terminals' %}>TERMINALS</a></li>
+           <a href={% url 'watbus.views.browse_all_terminals' %}>TERMINALS</a></li>
             <li class="navitem {% if urlname == "browse" %}current{% endif %}">
             <a href={% url 'watbus.views.browse' %}>BROWSE</a></li>
         </ul>
