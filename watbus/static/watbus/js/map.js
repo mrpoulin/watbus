@@ -37,7 +37,16 @@ function addMarkers(data){
         // Create objects like below, and put them in the array
         // {latLng: [48.8620722, 2.352047]}
         latLngArray = [stop.fields.stop_lat, stop.fields.stop_lon];
-        marker = {latLng: latLngArray};
+        marker = {
+            latLng: latLngArray,
+            events: {
+                click: function(marker, event, context){
+                    // The JSON serializes stop_id as stop.pk
+                    var newPage = "../browse/stops/" + stop.pk;
+                    document.location.href = newPage;
+                }
+            }
+        };
         markerArray.push(marker);
     });
     // Insert array of stops into map

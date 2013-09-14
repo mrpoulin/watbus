@@ -29,7 +29,7 @@ def search(request):
         query = request.GET['query'].strip()
         if not re.match(r'\d+', query):
             return HttpResponseBadRequest("Stop id must only contain numbers")
-        
+
         #redirect to terminal if stop is part of terminal.
         stop = Stops.objects.get(stop_id=query)
         if stop.parent_station:
@@ -44,7 +44,6 @@ def stopjson(request):
     bus_json = serializers.serialize("json", bus_stop_list);
     if not bus_stop_list:
         raise Http404
-    context = {'bus_stops': bus_stop_list, 'stop_id': 3700, 'bus_json': bus_json}
     return HttpResponse(bus_json, content_type="application/json")
 
 def map(request):
@@ -79,7 +78,7 @@ def next_buses_by_time(time, stop_id):
     ).order_by(
             'trip_id__trip_headsign', 'arrival_time'
     )
-    
+
     return next_bus_list
 
 def browse_stops(request, stop_id):
@@ -99,7 +98,7 @@ def browse_trips(request, trip_id):
     next_bus_list = StopTimes.objects.filter(trip_id=trip_id)
     if not next_bus_list:
         raise Http404
-    
+
     next_bus_list = next_bus_list.select_related(
             'trip_id'
     ).filter(
@@ -127,7 +126,7 @@ def browse_terminal(request, terminal_id):
     terminal_stops = Stops.objects.filter(parent_station=terminal_id)
     if not terminal_stops:
         raise Http404
-    
+
     stop_dict = {}
     for stop in terminal_stops:
         stopid = stop.stop_id
