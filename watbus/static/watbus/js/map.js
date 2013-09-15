@@ -16,6 +16,8 @@ function showPosition(position){
 var initialize = function(){
     var mapOptions = {options :{
 		zoom: 15,
+        maxZoom: 20,
+        minZoom: 13,
 		center: new google.maps.LatLng(43.47273, -80.541218),
 		mapTypeId: google.maps.MapTypeId.ROADMAP
 	}};
@@ -39,6 +41,9 @@ function addMarkers(data){
         latLngArray = [stop.fields.stop_lat, stop.fields.stop_lon];
         marker = {
             latLng: latLngArray,
+            options: {
+                icon: "../../static/watbus/img/marker.png"
+            },
             events: {
                 click: function(marker, event, context){
                     // The JSON serializes stop_id as stop.pk
@@ -46,13 +51,43 @@ function addMarkers(data){
                     document.location.href = newPage;
                 }
             }
+
         };
         markerArray.push(marker);
     });
     // Insert array of stops into map
     $("#map-canvas").gmap3({
         marker:{
-            values: markerArray
+            values: markerArray,
+            cluster: {
+                // Size of the cluster radius
+                radius: 50,
+                events: {
+                    mouseover: function(cluster){
+                        var item = $(cluster.main.getDOMElement());
+                        item.css("border", "1px solid red");
+                    }, 
+                    mouseout: function(cluster){
+                        var item = $(cluster.main.getDOMElement());
+                        item.css("border", "0px");
+                    }
+                },
+                0: {
+                    content: "<div class='cluster cluster-1'>CLUSTER_COUNT</div>",
+                    width: 53, 
+                    height: 52
+                },
+                20: {
+                    content: "<div class='cluster cluster-2'>CLUSTER_COUNT</div>",
+                    width: 56,
+                    height: 55
+                },
+                50: {
+                    content: "<div class='cluster cluster-3'>CLUSTER_COUNT</div>",
+                    width: 66,
+                    height: 65
+                }
+            }
         }
     });
 }

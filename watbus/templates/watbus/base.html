@@ -39,9 +39,16 @@
         {% block content %} {% endblock %}
     </section>
     <footer id="contentfoot">
+        <nav class="navigation">
+        <ul>
+            <li class="navitem">
+            <a href={% url 'watbus.views.about' %}>ABOUT</a></li>
+            <li class="navitem">
+            <a href={% url 'watbus.views.sitemap' %}>SITEMAP</a></li>
+        </ul>
+        </nav>
     Disclaimer: This is only a bus schedule. It is not real time data.<br/>
     We are not associated with <a href="http://grt.ca/">Grand River Transit</a>. <br />
-    WatBus &copy; 2013 <a href="https://github.com/mrpoulin">Marc Poulin</a> and <a href="https://github.com/hollyxu">Holly Xu</a>.
     </footer>
     </div>
   </body>

@@ -1,0 +1,17 @@
+{% extends "watbus/base.html" %}
+
+{% block title %} Watbus - Browse {% endblock %}
+
+{% block content %} 
+  <h2 class="pagetitle">Sitemap</h2>
+  <ul class="terminallist">
+    {% for points in pois %}
+    <li class="terminallist_terminal"><a href="{% url 'watbus.views.browse_terminal' points.0 %}"> {{ points.1 }} </a></li>
+    {% endfor %}
+  </ul>
+  <ul class="stoplist">
+    {% for item in stops %}
+    <li class="stoplist_stop"><a href="{% url 'watbus.views.browse_stops' item.0 %}">Stop {{item.0}}: {{ item.1 }} </a></li>
+    {% endfor %}
+  </ul>
+{% endblock %}
