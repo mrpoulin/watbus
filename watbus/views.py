@@ -133,3 +133,18 @@ def browse_terminal(request, terminal_id):
         stop_dict[stopid] = next_buses_by_time(datetime.datetime.now(), stopid)
 
     return render(request, 'watbus/browse_terminal.html', { 'terminal_name' : terminal_stops[0].stop_name , 'stops' : stop_dict.iteritems() })
+
+def about(request):
+    return render(request, 'watbus/about.html')
+
+def sitemap(request):
+    pois = Stops.objects.filter(location_type=1).values_list('stop_id', 'stop_name')
+    if not pois:
+        raise Http404
+
+    stops = Stops.objects.filter(location_type=0).values_list('stop_id', 'stop_name')
+    if not stops:
+        raise Http404
+
+    return render(request, 'watbus/sitemap.html', { 'pois' : pois, 'stops' : stops })
+

@@ -41,9 +41,10 @@ function addMarkers(data){
         latLngArray = [stop.fields.stop_lat, stop.fields.stop_lon];
         marker = {
             latLng: latLngArray,
+        /*  // Allows option to change the marker icon
             options: {
                 icon: "../../static/watbus/img/marker.png"
-            },
+            },*/
             events: {
                 click: function(marker, event, context){
                     // The JSON serializes stop_id as stop.pk
@@ -59,6 +60,7 @@ function addMarkers(data){
     $("#map-canvas").gmap3({
         marker:{
             values: markerArray,
+        /*  allows markers to be clustered
             cluster: {
                 // Size of the cluster radius
                 radius: 50,
@@ -87,7 +89,7 @@ function addMarkers(data){
                     width: 66,
                     height: 65
                 }
-            }
+            }*/
         }
     });
 }
