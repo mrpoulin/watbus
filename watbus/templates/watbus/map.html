@@ -1,7 +1,4 @@
 {% extends "watbus/base.html" %}
-{% block title %} 
-    EasyGRT Map
-{% endblock %}
 
 {% block headscripts %}
     <script type="text/javascript" src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
@@ -9,6 +6,7 @@
     {% load staticfiles %}
     <script type="text/javascript" src="{% static "watbus/js/gmap3.js" %}"></script>
     <script type="text/javascript" src="{% static "watbus/js/map.js" %}"></script>
+    <script type="text/javascript" src="http://fgnass.github.io/spin.js/dist/spin.js"></script>
     <style type="text/css">
         body section {height: 100%; width: 100%;}
         #map-canvas {width: auto; height: 100%; }
@@ -18,6 +16,6 @@
 {% block content %} 
     <div id="map-canvas"></div>
     <script>
-    $.getJSON("{% url 'watbus.views.stopjson' %}", addMarkers);
+        $.getJSON("{% url 'watbus.views.stopjson' %}", addMarkers);
     </script>
 {% endblock %} 
