@@ -15,7 +15,4 @@
 
 {% block content %} 
     <div id="map-canvas"></div>
-    <script>
-        $.getJSON("{% url 'watbus.views.stopjson' %}", addMarkers);
-    </script>
 {% endblock %} 
