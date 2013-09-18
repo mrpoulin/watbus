@@ -3,7 +3,7 @@ from django.views.generic.base import RedirectView
 from watbus import views
 
 urlpatterns = patterns('',
-        url(r'^$', RedirectView.as_view(url='/watbus/map')),
+        url(r'^$', views.coming, name='comingsoon'),
         url(r'^search/', views.search, name='search'),
         url(r'^map/$', views.map, name='map'),
         url(r'^browse/$', views.browse, name='browse'),

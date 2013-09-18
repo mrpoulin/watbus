@@ -148,3 +148,6 @@ def sitemap(request):
 
     return render(request, 'watbus/sitemap.html', { 'pois' : pois, 'stops' : stops })
 
+def coming(request):
+    return render(request, 'watbus/comingsoon.html')
+
