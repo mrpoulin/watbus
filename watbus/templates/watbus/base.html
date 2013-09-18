@@ -21,8 +21,8 @@
         <ul>
             <li class="navitem {% if urlname == "map" %}current{% endif %}">
             <a href={% url 'watbus.views.map' %}>MAP</a></li>
-            <li class="navitem {% if urlname == "terminals" %}current{% endif %}">
-           <a href={% url 'watbus.views.browse_all_terminals' %}>TERMINALS</a></li>
+            <li class="navitem {% if urlname == "freqstops" %}current{% endif %}">
+            <a href={% url 'watbus.views.browse_all_freqstops' %}>FREQUENT STOPS</a></li>
             <li class="navitem {% if urlname == "browse" %}current{% endif %}">
             <a href={% url 'watbus.views.browse' %}>BROWSE</a></li>
         </ul>

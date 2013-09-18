@@ -33,7 +33,7 @@ def search(request):
         #redirect to terminal if stop is part of terminal.
         stop = Stops.objects.get(stop_id=query)
         if stop.parent_station:
-            return redirect(reverse('watbus.views.browse_terminal', kwargs={'terminal_id':stop.parent_station}) + '#stop_' + str(stop.stop_id))
+            return redirect(reverse('watbus.views.browse_freqstop', kwargs={'stop_id':stop.parent_station}) + '#stop_' + str(stop.stop_id))
         else:
             return redirect('watbus.views.browse_stops', stop_id=query)
     else:
@@ -115,24 +115,24 @@ def browse_trips(request, trip_id):
     context = {'next_buses_by_stop' : next_bus_list, 'trip_id' : trip_id }
     return render(request, 'watbus/browse_trips.html', context)
 
-def browse_all_terminals(request):
+def browse_all_freqstops(request):
 
-    pois = Stops.objects.filter(location_type=1).values_list('stop_id', 'stop_name')
-    return render(request, 'watbus/browse_all_terminals.html', { 'pois' : pois })
+    freqstops = Stops.objects.filter(location_type=1).values_list('stop_id', 'stop_name')
+    return render(request, 'watbus/browse_all_freqstops.html', { 'freqstops' : freqstops })
 
-def browse_terminal(request, terminal_id):
+def browse_freqstop(request, stop_id):
 
     #Get all stops that have the given terminal ID
-    terminal_stops = Stops.objects.filter(parent_station=terminal_id)
-    if not terminal_stops:
+    freqstops = Stops.objects.filter(parent_station=stop_id)
+    if not freqstops:
         raise Http404
 
     stop_dict = {}
-    for stop in terminal_stops:
+    for stop in freqstops:
         stopid = stop.stop_id
         stop_dict[stopid] = next_buses_by_time(datetime.datetime.now(), stopid)
 
-    return render(request, 'watbus/browse_terminal.html', { 'terminal_name' : terminal_stops[0].stop_name , 'stops' : stop_dict.iteritems() })
+    return render(request, 'watbus/browse_freqstop.html', { 'stop_name' : freqstops[0].stop_name , 'stops' : stop_dict.iteritems() })
 
 def about(request):
     return render(request, 'watbus/about.html')

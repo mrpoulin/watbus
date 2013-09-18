@@ -1,9 +1,9 @@
 {% extends "watbus/base.html" %}
-{% block title %} Watbus - Terminal:  {{ terminal_name }} {% endblock %}
+{% block title %} Watbus - Frequent Stop:  {{ stop_name }} {% endblock %}
 
 {% block content %} 
 
-<h2 class="pagetitle"> {{ terminal_name }} </h2>
+<h2 class="pagetitle"> {{ stop_name }} </h2>
 
   {% for stop_id, buses in stops %}
   <h3 class="pagesubtitle" id="stop_{{ stop_id }}">Stop {{ stop_id }} </h3>

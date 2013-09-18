@@ -1,0 +1,14 @@
+{% extends "watbus/base.html" %}
+{% block title %} Watbus - Frequest Stops {% endblock %}
+
+{% block content %} 
+  <h2 class="pagetitle">Frequent Stops</h2>
+  <ul class="terminallist">
+    {% for stops in freqstops %}
+    <li class="terminallist_terminal"><a href="{% url 'watbus.views.browse_freqstop' stops.0 %}"> {{ stops.1 }} </a></li>
+    {% endfor %}
+  </ul>
+
+{% endblock %}
+
+
