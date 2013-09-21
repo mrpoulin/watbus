@@ -117,7 +117,7 @@ def browse_trips(request, trip_id):
 
 def browse_all_freqstops(request):
 
-    freqstops = Stops.objects.filter(location_type=1).values_list('stop_id', 'stop_name')
+    freqstops = Stops.objects.filter(location_type=1).order_by('parent_station_type')
     return render(request, 'watbus/browse_all_freqstops.html', { 'freqstops' : freqstops })
 
 def browse_freqstop(request, stop_id):

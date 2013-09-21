@@ -54,6 +54,11 @@ class Stops(models.Model):
     location_type = models.BooleanField()
     parent_station = models.CharField(max_length = 15)
 
+    #0 = terminal
+    #1 = school
+    #2 = commercial
+    parent_station_type = models.IntegerField()
+
     def __unicode__(self):
         return "{0}:{1} PART OF {2}".format(self.stop_id, self.stop_name, self.parent_station)
     

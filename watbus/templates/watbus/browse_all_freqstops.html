@@ -1,11 +1,16 @@
 {% extends "watbus/base.html" %}
+{% load freqstop_tags %}
 {% block title %} Watbus - Frequest Stops {% endblock %}
 
 {% block content %} 
+  {% regroup freqstops by parent_station_type as freqstops_by_type %}
   <h2 class="pagetitle">Frequent Stops</h2>
   <ul class="terminallist">
-    {% for stops in freqstops %}
-    <li class="terminallist_terminal"><a href="{% url 'watbus.views.browse_freqstop' stops.0 %}"> {{ stops.1 }} </a></li>
+    {% for stops in freqstops_by_type %}
+    <h1> {{ stops.grouper|location_type_to_string }}</h1>
+      {% for stop in stops.list %}
+        <li class="terminallist_terminal"><a href="{% url 'watbus.views.browse_freqstop' stop.stop_id %}"> {{ stop.stop_name }} </a></li>
+      {% endfor %}
     {% endfor %}
   </ul>
 

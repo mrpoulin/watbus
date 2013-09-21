@@ -39,9 +39,13 @@ class Command(BaseCommand):
         self._import_stops(os.path.join(args[0], 'stops.txt'))
         self._import_stop_times(os.path.join(args[0], 'stop_times.txt'))
 
+        #Preform post-processing on database
+        print "Performing post-processing"
+        self._postprocess()
 
+        print "Script completed."
 
-    #Generator that parses each line of a given csv file (fname).
+    #Generator that parses each line of a given csv file (fpath).
     #Returns each row in hash with values mapped to column names in a dictionary.
     #Outputs the full path of each file being imported, as well as lines processed so far.
     def _parse_csv(self, fpath, separator):
@@ -141,6 +145,7 @@ class Command(BaseCommand):
                 for data in self._parse_csv(path, ','):
                     data['stop_lat'] = float(data['stop_lat'])
                     data['stop_lon'] = float(data['stop_lon'])
+                    data['parent_station_type'] = '' #DSE Will not accept none as a value
 
                     d.insert(data)
 
@@ -153,4 +158,38 @@ class Command(BaseCommand):
                         data['departure_time'] = self._convert_time(data['departure_time']).__str__()
                         data['stop_sequence'] = int(data['stop_sequence'])
                         d.insert(data)
+
+    def _postprocess(self):
+        for stop in Stops.objects.filter(location_type=1) | Stops.objects.exclude(parent_station__exact=''):
+            if (
+                    (stop.parent_station == 'place_AST' or stop.stop_id == 'place_AST') or
+                    (stop.parent_station == 'place_CBC' or stop.stop_id == 'place_CBC') or
+                    (stop.parent_station == 'place_CST' or stop.stop_id == 'place_CST') or
+                    (stop.parent_station == 'place_FGP' or stop.stop_id == 'place_FGP') or
+                    (stop.parent_station == 'place_HHM' or stop.stop_id == 'place_HHM') or
+                    (stop.parent_station == 'place_HIT' or stop.stop_id == 'place_HIT') 
+                ):
+                stop.parent_station_type = 0; #See models.py
+            elif (
+                    (stop.parent_station == 'place_BCI' or stop.stop_id == 'place_BCI') or
+                    (stop.parent_station == 'place_CCD' or stop.stop_id == 'place_CCD') or
+                    (stop.parent_station == 'place_ECI' or stop.stop_id == 'place_ECI') or
+                    (stop.parent_station == 'place_HHS' or stop.stop_id == 'place_HHS') or
+                    (stop.parent_station == 'place_KCI' or stop.stop_id == 'place_KCI') or
+                    (stop.parent_station == 'place_PRHS' or stop.stop_id == 'place_PRHS') or
+                    (stop.parent_station == 'place_SDS' or stop.stop_id == 'place_SDS') or
+                    (stop.parent_station == 'place_SMH' or stop.stop_id == 'place_SMH') or
+                    (stop.parent_station == 'place_STBS' or stop.stop_id == 'place_STBS') or
+                    (stop.parent_station == 'place_WCI' or stop.stop_id == 'place_WCI') or
+                    (stop.parent_station == 'place_WSS' or stop.stop_id == 'place_WSS')
+                ):
+                stop.parent_station_type = 1
+            else:
+                stop.parent_station_type = 2;
+
+            stop.save()
+
+
+
+
 
