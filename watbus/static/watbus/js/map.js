@@ -14,26 +14,19 @@ function initialize() {
         map: mapOptions
     });
 
-    // Add the spinner (stops when the marker is loaded)
-    startSpinner();
-
-    // Add event listener: wait for users to move the Viewport
-    // Calls function showMarkers when the Viewport stops panning
-    var map = $('#map-canvas').gmap3("get");
-    google.maps.event.addListener(map, 'idle', showMarkers);
+    // Get marker data from Google FusionTables and put them on map
+    var map = $("#map-canvas").gmap3("get");
+    var layer = new google.maps.FusionTablesLayer({
+        query: {
+            select: '\'Geocodable address\'',
+            from: '1KTU-R_LmfZFQ73LBETxM5MrvDOU5Ms_GcASuqkM'
+        }
+    });
+    layer.setMap(map);
 
     // Attempt to get the user's location and center map around them
     getCustomLocation();
-}
 
-function showMarkers(){
-    spinner.stop();
-    startSpinner();
-    var map = $('#map-canvas').gmap3("get");
-    var bounds = map.getBounds();
-    $.getJSON("/watbus/stopjson", function(data){
-        addMarkers(data, bounds);
-    });  
 }
 
 function getCustomLocation(){
@@ -46,17 +39,8 @@ function getCustomLocation(){
     }
 }
 
-function inBounds(latLng, bounds){
-    if(bounds.ea.b <= latLng[0] && latLng[0] <= bounds.ea.d){
-        if(bounds.ia.b <= latLng[1] && latLng[1] <= bounds.ia.d){
-            return true;
-        }
-    } 
-    return false;
-}
-
 // Fetch stops within and add them to the map
-function addMarkers(data, bounds){
+function addMarkers(data){
 
     $('#map-canvas').gmap3('clear', 'marker');
 
@@ -69,20 +53,18 @@ function addMarkers(data, bounds){
         // Create objects like below, and put them in the array
         // {latLng: [48.8620722, 2.352047]}
         latLngArray = [stop.fields.stop_lat, stop.fields.stop_lon];
-        if(inBounds(latLngArray, bounds)){
-            marker = {
-                latLng: latLngArray,
-                events: {
-                    click: function(marker, event, context){
-                        // The JSON serializes stop_id as stop.pk
-                        var newPage = "../browse/stops/" + stop.pk;
-                        document.location.href = newPage;
-                    }
+        marker = {
+            latLng: latLngArray,
+            events: {
+                click: function(marker, event, context){
+                    // The JSON serializes stop_id as stop.pk
+                    var newPage = "../browse/stops/" + stop.pk;
+                    document.location.href = newPage;
                 }
+            }
 
-            };
-            markerArray.push(marker);
-        }
+        };
+        markerArray.push(marker);
     });
 
     // Insert array of stops into map
