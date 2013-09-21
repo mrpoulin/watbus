@@ -72,10 +72,6 @@ function addMarkers(data, bounds){
         if(inBounds(latLngArray, bounds)){
             marker = {
                 latLng: latLngArray,
-            /*  // Allows option to change the marker icon
-                options: {
-                    icon: "../../static/watbus/img/marker.png"
-                },*/
                 events: {
                     click: function(marker, event, context){
                         // The JSON serializes stop_id as stop.pk
@@ -93,36 +89,6 @@ function addMarkers(data, bounds){
     $("#map-canvas").gmap3({
         marker:{
             values: markerArray,
-        /*  allows markers to be clustered
-            cluster: {
-                // Size of the cluster radius
-                radius: 50,
-                events: {
-                    mouseover: function(cluster){
-                        var item = $(cluster.main.getDOMElement());
-                        item.css("border", "1px solid red");
-                    }, 
-                    mouseout: function(cluster){
-                        var item = $(cluster.main.getDOMElement());
-                        item.css("border", "0px");
-                    }
-                },
-                0: {
-                    content: "<div class='cluster cluster-1'>CLUSTER_COUNT</div>",
-                    width: 53, 
-                    height: 52
-                },
-                20: {
-                    content: "<div class='cluster cluster-2'>CLUSTER_COUNT</div>",
-                    width: 56,
-                    height: 55
-                },
-                50: {
-                    content: "<div class='cluster cluster-3'>CLUSTER_COUNT</div>",
-                    width: 66,
-                    height: 65
-                }
-            }*/
         }
     });
     spinner.stop();
