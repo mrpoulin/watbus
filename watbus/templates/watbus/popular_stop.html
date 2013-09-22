@@ -1,6 +1,11 @@
 {% extends "watbus/base.html" %}
 {% block title %} Watbus - Frequent Stop:  {{ stop_name }} {% endblock %}
 
+{% block headscripts %}
+    {% load staticfiles %}
+<link rel="stylesheet" type="text/css" href="{% static "watbus/css/browse.css" %}" />
+{% endblock %} 
+
 {% block content %} 
 
 <h2 class="pagetitle"> {{ stop_name }} </h2>

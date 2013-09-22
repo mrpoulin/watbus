@@ -1,6 +1,11 @@
 {% extends "watbus/base.html" %}
+{% block headscripts %}
+    {% load staticfiles %}
+<link rel="stylesheet" type="text/css" href="{% static 'watbus/css/map.css' %}" />
+{% endblock %} 
 {% load freqstop_tags %}
 {% block title %} Watbus - Frequest Stops {% endblock %}
+
 
 {% block content %} 
   {% regroup freqstops by parent_station_type as freqstops_by_type %}
@@ -9,7 +14,7 @@
     {% for stops in freqstops_by_type %}
     <h1> {{ stops.grouper|location_type_to_string }}</h1>
       {% for stop in stops.list %}
-        <li class="terminallist_terminal"><a href="{% url 'watbus.views.browse_freqstop' stop.stop_id %}"> {{ stop.stop_name }} </a></li>
+        <li class="terminallist_terminal"><a href="{% url 'watbus.views.popular_stop' stop.stop_id %}"> {{ stop.stop_name }} </a></li>
       {% endfor %}
     {% endfor %}
   </ul>

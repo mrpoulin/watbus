@@ -2,6 +2,11 @@
 
 {% block title %} Watbus - Stop:  {{ stop_id }} {% endblock %}
 
+{% block headscripts %}
+    {% load staticfiles %}
+<link rel="stylesheet" type="text/css" href="{% static "watbus/css/browse.css" %}" />
+{% endblock %} 
+
 {% block content %} 
 
   <h2 class="pagetitle">Stop {{ stop_id }}</h2>

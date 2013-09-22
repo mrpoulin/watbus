@@ -1,11 +1,12 @@
 /* ---- General ---- */
+
 html {height: 100%;}
 body { background: #000000; padding: 0; margin: 0; height: 100%; }
 
-a {text-decoration: none; color: #178899; }
+a {text-decoration: none; color: #eae02a; }
+a:hover { color: #01c7dc; }
 
-.container {width: 480px; margin: 0 auto; color: #ffffff; font: 12pt roboto; background: url('../img/bg.png'); min-height: 100%; }
-body.map .container { height: 100%; }
+.container { margin: 0 auto; color: #ffffff; font: 12pt roboto; background: url('../img/bg.png'); min-height: 100%; }
 
 /* ----  Header ---- */
 
@@ -26,80 +27,6 @@ body.map .container { height: 100%; }
   font: 18pt helvetica; font-weight: lighter; padding: 10px;
 }
 
-
-/*  ---- Favourites ---- */
-
-.favlink a {
-    color: #ffffff;
-    display: block;
-  padding: 10px 10px 10px 20px;
-    background: url('../img/arrow.png') no-repeat center right;
-}
-
-.favlink{
-  background: url('../img/titlegrad.png') repeat-x;
-  font: 18pt helvetica;
-  font-weight: lighter;
-  padding-right: 20px;
-}
-
-.title {
-  background: url('../img/titlegrad.png') repeat-x;
-  font: 18pt helvetica;
-  font-weight: lighter;
-  text-align: center;
-  padding-right: 20px;
-}
-
-.title a {
-    color: #ffffff;
-    display: block;
-    background: url('../img/star.png') no-repeat center right;
-  padding: 10px;
-}
-
-/* ---- Bus List  ---- */
-
-.pagetitle { padding: 10px 5px 10px 5px; font: 24px Helvetica; 
-    margin: 0; text-align: center; }
-.pagesubtitle { font: 16px Helvetica; text-transform: uppercase; 
-    text-align: center; margin: 10px 0 0 0; letter-spacing: 2px;}
-
-/* -> Browse by Stops */
-
-ul.stoplist {padding: 10px 0 0 0px; margin: 0; list-style: none;}
-li.stoplist_bus a {background: #000000; display: block; 
-    padding: 6px 10px 6px 10px; font: 24px Helvetica;  }
-
-ul.sublist { padding: 0; margin: 0;}
-li.sublist_time {list-style: none; border-bottom: 1px solid #555555;
-    padding: 5px 5px 5px 50px; }
-a.busname {}
-
-/* -> Browse by Trips */
-
-ul.triplist {padding: 0 0 20px 0; margin: 0; list-style: none; }
-li.triplist_trip {border-bottom: 1px solid #555555; background: #000000;
-    padding: 5px; margin: 0; }
-
-/* -> Browse by Terminals */
-
-ul.terminallist {padding: 0 0 20px 0; margin: 0; list-style: none; }
-li.terminallist_terminal { border-bottom: 1px solid #555555; background: #000000; padding: 5px; margin: 0; }
-
-/* ----- About ----- */
-
-.about #content {padding: 0 10px 0 10px;}
-
-/* ----- Sitemap ----- */
-
-.sitemap #content { padding: 0 10px 0 10px;}
-.sitemap .terminallist, .sitemap .stoplist {padding: 0; margin: 0;}
-.sitemap .terminallist { margin: 0 0 10px 0; padding: 0 0 10px 0; 
-    border-bottom: 1px solid #555555;}
-.sitemap .terminallist_terminal, .stoplist_stop { padding: 3px; 
-    font-size: 10px; background: #000000;  display: inline-table;
-    border: 0; margin: 0 3px 0 3px;}
-/* Footer */
+/* ---- Footer ---- */
 
 #contentfoot {font-size: 9pt; padding: 10px; bottom: 0; background: #000000; text-align: center; }

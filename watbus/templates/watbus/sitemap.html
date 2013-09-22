@@ -2,11 +2,16 @@
 
 {% block title %} Watbus - Browse {% endblock %}
 
+{% block headscripts %}
+    {% load staticfiles %}
+<link rel="stylesheet" type="text/css" href="{% static "watbus/css/other.css" %}" />
+{% endblock %} 
+
 {% block content %} 
   <h2 class="pagetitle">Sitemap</h2>
   <ul class="terminallist">
     {% for points in pois %}
-    <li class="terminallist_terminal"><a href="{% url 'watbus.views.browse_terminal' points.0 %}"> {{ points.1 }} </a></li>
+    <li class="terminallist_terminal"><a href="{% url 'watbus.views.popular_stop' points.0 %}"> {{ points.1 }} </a></li>
     {% endfor %}
   </ul>
   <ul class="stoplist">

@@ -1,17 +1,14 @@
 {% extends "watbus/base.html" %}
 
 {% block headscripts %}
+    {% load staticfiles %}
     <script type="text/javascript" src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBHyk1XXbAb_wovesF9e7mLcMx5_hTxcbU&sensor=true"></script>
-    {% load staticfiles %}
     <script type="text/javascript" src="{% static "watbus/js/gmap3.js" %}"></script>
     <script type="text/javascript" src="{% static "watbus/js/map.js" %}"></script>
     <script type="text/javascript" src="http://fgnass.github.io/spin.js/dist/spin.js"></script>
-    <style type="text/css">
-        body section {height: 100%; width: 100%;}
-        #map-canvas {width: auto; height: 100%; }
-    </style>
-    {% endblock %} 
+    <link rel="stylesheet" type="text/css" href="{% static "watbus/css/map.css" %}" />
+{% endblock %} 
 
 {% block content %} 
     <div id="map-canvas"></div>

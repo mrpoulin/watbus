@@ -2,6 +2,11 @@
 
 {% block title %} Watbus - Trip: {{ next_buses_by_stop.0.trip_id.trip_headsign }}  {% endblock %}
 
+{% block headscripts %}
+    {% load staticfiles %}
+<link rel="stylesheet" type="text/css" href="{% static "watbus/css/browse.css" %}" />
+{% endblock %} 
+
 {% block content %} 
 <h2 class='pagetitle'> {{ next_buses_by_stop.0.trip_id.trip_headsign }} </h2>
   <ul class="triplist">

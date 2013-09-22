@@ -14,25 +14,37 @@
         <header class="contentheader">
         <div class="headerimg">
             <a href="/">
-                <img src="{% static "watbus/img/header.png" %}" />
+                watbus
             </a>
         </div>
-        <nav class="navigation">
-        <ul>
-            <li class="navitem {% if urlname == "map" %}current{% endif %}">
-            <a href={% url 'watbus.views.map' %}>MAP</a></li>
-            <li class="navitem {% if urlname == "freqstops" %}current{% endif %}">
-            <a href={% url 'watbus.views.browse_all_freqstops' %}>FREQUENT STOPS</a></li>
-            <li class="navitem {% if urlname == "browse" %}current{% endif %}">
-            <a href={% url 'watbus.views.browse' %}>BROWSE</a></li>
-        </ul>
-        </nav>
-          <div class="stop_search">
-            <form action={% url 'watbus.views.search' %} method="get">
-              <input type="text" name="query">
-              <input type="submit" value="Search">
-            </form>
-          </div>
+        <div class="navbar">
+            <div id="navdate">
+            </div>
+            <nav class="headnav">
+            <ul>
+                <li class="{% if urlname == "map" %}current{% endif %}">
+                <a href={% url 'watbus.views.map' %}>map</a></li>
+                <li class="diamond">
+                    <img src="{% static "watbus/img/diamond.png" %}" />
+                </li>
+                <li class="{% if urlname == "freqstops" %}current{% endif %}">
+                <a href={% url 'watbus.views.popular' %}>popular</a></li>
+                <li class="diamond">
+                    <img src="{% static "watbus/img/diamond.png" %}" />
+                </li>
+                <li class="{% if urlname == "browse" %}current{% endif %}">
+                <a href="#">browse</a></li>
+            </ul>
+            </nav>
+            <div id="navtime">
+            </div>
+        </div>
+      <div id="stop_search">
+        <form action={% url 'watbus.views.search' %} method="get">
+          <input type="text" name="query">
+          <input type="submit" value="Search">
+        </form>
+      </div>
       <div class=clear></div>
       </header>
 
@@ -40,16 +52,30 @@
         {% block content %} {% endblock %}
     </section>
     <footer id="contentfoot">
-        <nav class="navigation">
+        <div class="disclaimer">
+            Disclaimer: This is only a bus schedule. It is not real time data.<br/>
+        </div>
+        <nav class="footnav">
         <ul>
-            <li class="navitem">
-            <a href={% url 'watbus.views.about' %}>ABOUT</a></li>
-            <li class="navitem">
-            <a href={% url 'watbus.views.sitemap' %}>SITEMAP</a></li>
+            <li><a href={% url 'watbus.views.about' %}>about</a></li>
+            <li class="whitediamond">
+                <img src="{% static "watbus/img/whitediamond.png" %}" />
+            </li>
+            <li><a href={% url 'watbus.views.sitemap' %}>sitemap</a></li>
+            <li class="whitediamond">
+                <img src="{% static "watbus/img/whitediamond.png" %}" />
+            </li>
+            <li><a href="http://twitter.com/watbusca/">twitter</a></li>
+            <li class="whitediamond">
+                <img src="{% static "watbus/img/whitediamond.png" %}" />
+            </li>
+            <li><a href="http://facebook.com/watbusca/">facebook</a></li>
+            <li class="whitediamond">
+                <img src="{% static "watbus/img/whitediamond.png" %}" />
+            </li>
+            <li><a href="https://github.com/mrpoulin/watbus">github</a></li>
         </ul>
         </nav>
-    Disclaimer: This is only a bus schedule. It is not real time data.<br/>
-    We are not associated with <a href="http://grt.ca/">Grand River Transit</a>. <br />
     </footer>
     </div>
   </body>
