@@ -69,5 +69,28 @@ class StopTimes(models.Model):
     stop_id = models.ForeignKey(Stops, db_column='stop_id')
     stop_sequence = models.IntegerField()
 
+    def reltime(self):
+        import datetime
+
+        now = datetime.datetime.now()
+        diff = datetime.datetime.combine(datetime.date.today(), self.arrival_time) - now;
+        
+        timeDiff = dict()
+        #Deal with negative times
+        if diff.days < 0:
+            timeDiff['occurred'] = 1
+        else:
+            timeDiff['occurred'] = 0
+        
+        diff_secs = diff.seconds
+
+        mh = 60 * 60;
+        mm = 60;
+
+        timeDiff['hours'] = diff_secs / mh
+        timeDiff['minutes'] = (diff_secs - timeDiff['hours'] * mh) / mm
+
+        return timeDiff
+
     def __unicode__(self):
         return "Trip:{0},Stop:{1}:{2}->{3},{4}".format(self.trip_id, self.stop_id, self.arrival_time, self.departure_time, self.stop_sequence)
