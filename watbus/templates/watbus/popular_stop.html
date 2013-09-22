@@ -11,7 +11,9 @@
 <h2 class="pagetitle"> {{ stop_name }} </h2>
 
   {% for stop_id, buses in stops %}
-  <h3 class="pagesubtitle" id="stop_{{ stop_id }}">Stop {{ stop_id }} </h3>
+  <h3 class="pagesubtitle" id="stop_{{ stop_id }}">
+      Stop {{ stop_id }} 
+  </h3>
     {% include 'watbus/buses_by_route.html' with next_buses_by_time=buses %}
   {% endfor %}
 

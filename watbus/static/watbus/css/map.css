@@ -1,3 +1,24 @@
+/*
+ * Note from Holly: 
+ * The map page is special because scrolling is NOT allowed.
+ * 1. The disclaimer and footer are hidden.
+ * 2. The map fills the entire screen minus the header.
+ *    This uses conflicting absolute positions, as described here:
+ *    http://alistapart.com/article/conflictingabsolutepositions
+ */
+
+html {height: 100%; width: 100%;}
 body section {height: 100%; width: 100%;}
-body.map .container { height: 100%; }
-#map-canvas {width: auto; height: 100%; }
+body.map {overflow: hidden; padding: 0; margin: 0; height: 100%; width: 100%;}
+
+/*
+ * There is additional javascript that calculates the height of 
+ * .contentheader and then sets 'top' of #content to that height.
+ * */
+body.map .contentheader { padding: 0; margin: 0; 
+    position: absolute; top: 0; left: 0; width: 100%; }
+body.map #content {padding: 0; margin: 0; position: absolute; 
+    left: 0; right: 0; bottom: 0; overflow: auto; width: 100%;  }
+
+#map-canvas {width: auto; height: 100%; margin: 0 30px 0 30px;}
+body.map .disclaimer, body.map #contentfoot {display: none; }

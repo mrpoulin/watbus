@@ -1,30 +1,51 @@
 
-/* ---- Bus List  ---- */
+/* ---- Generic Browse Pages ---- */
 
-.pagetitle { padding: 10px 5px 10px 5px; font: 24px Helvetica; 
-    margin: 0; text-align: center; }
-.pagesubtitle { font: 16px Helvetica; text-transform: uppercase; 
-    text-align: center; margin: 10px 0 0 0; letter-spacing: 2px;}
+h2.pagetitle { padding: 20px 0 20px 0; text-align: center; 
+    color: #888888; font-weight: 400; font-size: 16px;
+    text-transform: uppercase; letter-spacing: 5px;}
+h3.pagesubtitle { font-size: 20px; font-weight: 200; margin: 0;
+    color: #ffffff;
+    font-family: 'Source Code Pro', Consolas, monaco, monospace;  
+}
 
-/* -> Browse by Stops */
+/* ---- Popular ---- */
 
-ul.stoplist {padding: 10px 0 0 0px; margin: 0; list-style: none;}
-li.stoplist_bus a {background: #000000; display: block; 
-    padding: 6px 10px 6px 10px; font: 24px Helvetica;  }
+.popularcol {display: inline-block; float: left; 
+    width: 33%; min-width: 200px; }
 
-ul.sublist { padding: 0; margin: 0;}
-li.sublist_time {list-style: none; border-bottom: 1px solid #555555;
-    padding: 5px 5px 5px 50px; }
-a.busname {}
+h3 span.rightarrow {color: #f94290; }
 
-/* -> Browse by Trips */
+/* ---- Stop List ---- */
+/* many bus routes, many stops */
+    
+ul.stoplist {padding: 10px 0 0 0px; margin: 0; list-style: none; }
+ul.stoplist + div.clear { border-bottom: 2px solid #000000;
+    margin-bottom: 40px;}
+li.stoplist_bus { font-size: 24px; clear: both; 
+    border-top: 2px solid #000000; padding: 10px 0 0 0;}
+
+.headsign {width: 30%; float: left; }
+.headsign span.rightarrow {color: #ede22a; }
+.headsign a.busname { color: #ffffff; font-size: 16px; }
+
+ul.sublist { padding: 0; margin: 0; font-size: 16px; float: right; 
+    margin: 0 0 10px 0; }
+li.sublist_time {list-style: none; display: inline-block; padding: 0;
+    font-family: 'Source Code Pro', Consolas, monaco, monospace;  }
+
+/* ---- Trip List ---- */
+/* 1 bus route, many stops */ 
 
 ul.triplist {padding: 0 0 20px 0; margin: 0; list-style: none; }
 li.triplist_trip {border-bottom: 1px solid #555555; background: #000000;
     padding: 5px; margin: 0; }
 
-/* -> Browse by Terminals */
+/* ---- Terminal List ---- */
+/* many bus route, 0 stops */ 
 
 ul.terminallist {padding: 0 0 20px 0; margin: 0; list-style: none; }
-li.terminallist_terminal { border-bottom: 1px solid #555555; background: #000000; padding: 5px; margin: 0; }
+li.terminallist_terminal {  margin: 0; padding: 5px 5px 5px 25px; }
+li.terminallist_terminal a { color: #aaaaaa; }
+li.terminallist_terminal a:hover {color: #f94290; }
 

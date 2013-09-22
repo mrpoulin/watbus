@@ -5,7 +5,11 @@
     <meta charset="utf-8" />
     <title>{% block title %} Watbus {% endblock %} </title>
     {% load staticfiles %}
+    <script type="text/javascript" src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+    <script type="text/javascript" src="{% static 'watbus/js/general.js' %}"></script>
+    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro:200' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="{% static "watbus/css/style.css" %}" />
+
     {% block headscripts %} {% endblock %}
   </head>
 
@@ -14,7 +18,7 @@
         <header class="contentheader">
         <div class="headerimg">
             <a href="/">
-                watbus
+                <h1>watbus</h1>
             </a>
         </div>
         <div class="navbar">
@@ -22,39 +26,42 @@
             </div>
             <nav class="headnav">
             <ul>
-                <li class="{% if urlname == "map" %}current{% endif %}">
+                <li class="nav_map">
                 <a href={% url 'watbus.views.map' %}>map</a></li>
                 <li class="diamond">
                     <img src="{% static "watbus/img/diamond.png" %}" />
                 </li>
-                <li class="{% if urlname == "freqstops" %}current{% endif %}">
+                <li class="nav_popular">
                 <a href={% url 'watbus.views.popular' %}>popular</a></li>
                 <li class="diamond">
                     <img src="{% static "watbus/img/diamond.png" %}" />
                 </li>
-                <li class="{% if urlname == "browse" %}current{% endif %}">
-                <a href="#">browse</a></li>
+                <li class="nav_stop">
+                    <div id="stop_search">
+                        <div class="arrow_top"></div>
+                        <form action={% url 'watbus.views.search' %} method="get">
+                          <input type="text" name="query" size="7" />
+                          <input type="submit" value="search" />
+                        </form>
+                    </div>
+                <a href="#" id="togglestop">stop</a></li>
             </ul>
             </nav>
             <div id="navtime">
             </div>
         </div>
-      <div id="stop_search">
-        <form action={% url 'watbus.views.search' %} method="get">
-          <input type="text" name="query">
-          <input type="submit" value="Search">
-        </form>
-      </div>
       <div class=clear></div>
       </header>
 
     <section id="content">
         {% block content %} {% endblock %}
     </section>
-    <footer id="contentfoot">
+        <div class=clear></div>
         <div class="disclaimer">
-            Disclaimer: This is only a bus schedule. It is not real time data.<br/>
+        Disclaimer: This is only a bus schedule. It does not contain real time data.<br/>
         </div>
+    </div>
+    <footer id="contentfoot">
         <nav class="footnav">
         <ul>
             <li><a href={% url 'watbus.views.about' %}>about</a></li>
@@ -77,6 +84,5 @@
         </ul>
         </nav>
     </footer>
-    </div>
   </body>
 </html>

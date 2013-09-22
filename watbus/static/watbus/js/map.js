@@ -1,6 +1,10 @@
 var spinner;
 
-function initialize() {
+function startMap() {
+
+    $("#content").css("top", $(".contentheader").height());
+
+    // Defines the map. "gmap3" is the jQuery plugin for Google Maps
     var mapOptions = {options :{
 		zoom: 16,
         maxZoom: 20,
@@ -9,7 +13,6 @@ function initialize() {
 		mapTypeId: google.maps.MapTypeId.ROADMAP
 	}};
 
-    // Defines the map. "gmap3" is the jQuery plugin for Google Maps
     $("#map-canvas").gmap3({
         map: mapOptions
     });
@@ -99,4 +102,5 @@ function startSpinner(){
     spinner = new Spinner(opts).spin(target);
 }
 
-$(document).ready(initialize);
+$(document).ready(startMap);
+
