@@ -160,6 +160,9 @@ class Command(BaseCommand):
                         d.insert(data)
 
     def _postprocess(self):
+        #Stop that has no buses coming to it. Messes up the KCI terminal
+        Stops.objects.filter(stop_id=3714).delete()
+
         for stop in Stops.objects.filter(location_type=1) | Stops.objects.exclude(parent_station__exact=''):
             if (
                     (stop.parent_station == 'place_AST' or stop.stop_id == 'place_AST') or
