@@ -19,27 +19,32 @@ h3 span.rightarrow {color: #f94290; }
 /* ---- Stop List ---- */
 /* many bus routes, many stops */
     
-ul.stoplist {padding: 10px 0 0 0px; margin: 0; list-style: none; }
+ul.stoplist {padding: 10px 0 0 0px; margin: 0; list-style: none; 
+    font-family: 'Source Code Pro', Consolas, monaco, monospace; }
 ul.stoplist + div.clear { border-bottom: 2px solid #000000;
     margin-bottom: 40px;}
 li.stoplist_bus { font-size: 24px; clear: both; 
     border-top: 2px solid #000000; padding: 10px 0 0 0;}
 
-.headsign {width: 30%; float: left; }
-.headsign span.rightarrow {color: #ede22a; }
-.headsign a.busname { color: #ffffff; font-size: 16px; }
+.headsign { float: left; }
+.headsign span.rightarrow {color: #888888; }
+.headsign a.busname { color: #ede22a; font-size: 16px; letter-spacing: -1px; }
+.headsign a:hover {color: #ffffff; }
 
 ul.sublist { padding: 0; margin: 0; font-size: 16px; float: right; 
     margin: 0 0 10px 0; }
-li.sublist_time {list-style: none; display: inline-block; padding: 0;
-    font-family: 'Source Code Pro', Consolas, monaco, monospace;  }
+li.sublist_time {list-style: none; display: inline-block; padding: 0; }
+
+.actual_time {color: #888888; }
+li.sublist_time .relative_time { font-size: 24px; } 
+li.sublist_time:first-child .relative_time {color: #ede22a;  } 
 
 /* ---- Trip List ---- */
 /* 1 bus route, many stops */ 
 
-ul.triplist {padding: 0 0 20px 0; margin: 0; list-style: none; }
-li.triplist_trip {border-bottom: 1px solid #555555; background: #000000;
-    padding: 5px; margin: 0; }
+ul.triplist { padding: 0; margin: 0 0 20px 0; list-style: none; 
+    font-family: 'Source Code Pro', Consolas, monaco, monospace; }
+li.triplist_trip {}
 
 /* ---- Terminal List ---- */
 /* many bus route, 0 stops */ 
