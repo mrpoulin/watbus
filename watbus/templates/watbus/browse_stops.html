@@ -1,6 +1,6 @@
 {% extends "watbus/base.html" %}
 
-{% block title %} Watbus - Stop:  {{ stop_id }} {% endblock %}
+{% block title %} Watbus - Stop:  {{ stop_id }} {{ stop_name }} {% endblock %}
 
 {% block headscripts %}
     {% load staticfiles %}
@@ -9,7 +9,7 @@
 
 {% block content %} 
 
-  <h2 class="pagetitle">Stop {{ stop_id }}</h2>
+<h2 class="pagetitle">Stop {{ stop_id }} &mdash; {{ stop_name }} </h2>
 
   {% include "watbus/buses_by_route.html" with next_buses_by_time=next_buses_by_time %}
 

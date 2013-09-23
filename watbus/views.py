@@ -79,14 +79,14 @@ def next_buses_by_time(time, stop_id):
             'trip_id__trip_headsign', 'arrival_time'
     )
 
-    return list(next_bus_list)
+    return next_bus_list
 
 def browse_stops(request, stop_id):
 
     curr_time = datetime.datetime.now()
     next_bus_list = next_buses_by_time(curr_time, stop_id)
 
-    context = { 'next_buses_by_time' : next_bus_list, 'stop_id' : stop_id }
+    context = { 'next_buses_by_time' : next_bus_list, 'stop_id' : stop_id, 'stop_name' : next_bus_list[0].stop_id.stop_name }
     return render(request, 'watbus/browse_stops.html', context)
 
 def browse_trips(request, trip_id):
