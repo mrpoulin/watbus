@@ -40,9 +40,14 @@
                     <div id="stop_search">
                         <div class="arrow_top"></div>
                         <form action={% url 'watbus.views.search' %} method="get">
-                          <input type="text" name="query" size="7" />
-                          <input type="submit" value="search" />
-                        </form>
+                            <div class="searchbox">
+                                <input type="text" name="query" size="7" />
+                            </div>
+                            <div class="searchbutton">
+                                <input type="submit" value="search" />
+                            </div>
+                          <div class="clear"></div>
+                      </form>
                     </div>
                 <a href="#" id="togglestop">stop</a></li>
             </ul>
