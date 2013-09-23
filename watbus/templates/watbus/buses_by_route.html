@@ -12,7 +12,7 @@
     </div>
 
       <ul class="sublist">
-        {% for bus in buses.list|slice:"-3:" %}
+        {% for bus in buses.list|slice:"0:3" %}
         <li class="sublist_time">
             <div class="actual_time"> {{ bus.arrival_time }}
             </div>

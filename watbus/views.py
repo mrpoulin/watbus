@@ -64,9 +64,6 @@ def next_buses_by_time(time, stop_id):
     if not next_bus_list:
         raise Http404
 
-    #Best solution right now to get past buses
-    time = time - datetime.timedelta(hours=2)
-
     #Will return buses on ALL routes coming to a given stop, ordered by arrival time.
     next_bus_list = next_bus_list.select_related(
             'trip_id'
