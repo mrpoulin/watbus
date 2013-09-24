@@ -25,7 +25,12 @@ function startMap() {
             from: '1KTU-R_LmfZFQ73LBETxM5MrvDOU5Ms_GcASuqkM'
         }
     });
-    layer.setMap(map);
+
+    startSpinner();
+
+    // Turn off fusion tables for now
+    // layer.setMap(map);
+    $.getJSON("/watbus/stopjson", addMarkers);
 
     // Attempt to get the user's location and center map around them
     getCustomLocation();
