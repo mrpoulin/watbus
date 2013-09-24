@@ -7,14 +7,14 @@
     <div class="headsign"> 
     <span class="rightarrow">&gt;</span>
       <a href="{% url 'watbus.views.browse_trips' buses.list.0.trip_id.trip_id %}" class='busname'>
-          {{ buses.grouper }}
+        {{ buses.grouper }}
       </a>
     </div>
 
       <ul class="sublist">
         {% for bus in buses.list|slice:"0:3" %}
         <li class="sublist_time">
-            <div class="actual_time"> {{ bus.arrival_time }}
+            <div class="actual_time"> {{ bus.arrival_time|time:"h:i a" }}
             </div>
             <div class="relative_time">{{ bus.reltime|format_rel_time }} 
             </div>
