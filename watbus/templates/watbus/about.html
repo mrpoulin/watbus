@@ -1,6 +1,6 @@
 {% extends "watbus/base.html" %}
 
-{% block title %} Watbus - About {% endblock %}
+{% block title %} watbus - About {% endblock %}
 
 {% block headscripts %}
     {% load staticfiles %}
@@ -8,7 +8,73 @@
 {% endblock %} 
 
 {% block content %} 
-<p>
-    WatBus &copy; 2013 <a href="https://github.com/mrpoulin">Marc Poulin</a> and <a href="https://github.com/hollyxu">Holly Xu</a>.
-</p>
+<h2 class="pagetitle">Meet the Developers </h2>
+<div class="left">
+    <h3 class="pagesubtitle">Holly Xu</h3>
+    <div class="portrait">
+        <img src="{% static "watbus/img/holly.png" %}" />
+    </div>
+    <p>Hello, I'm Holly! I'm in 3A Computer Science at UWaterloo. I like cars, robots, and beautiful design. </p>
+    <ul>
+        <li><a href="http://hollyx.ca/">Portfolio</a></li>
+        <li><a href="https://github.com/hollyxu">Github</a></li>
+        <li><a href="http://www.linkedin.com/in/hollyx">LinkedIn</a></li>
+    </ul>
+</div>
+<div class="right">
+    <h3 class="pagesubtitle">Marc Poulin</h3>
+    <div class="portrait">
+        <img src="{% static "watbus/img/marc.png" %}" />
+    </div>
+    <p>Hey! I'm Marc. I specialize in backend development, but I love playing with JavaScript to make cool web apps.</p>
+    <ul>
+        <li><a href="https://github.com/mrpoulin">Github</a></li>
+        <li><a href="http://ca.linkedin.com/pub/marc-poulin/7b/823/7a7">LinkedIn</a></li>
+    </ul>
+</div>
+<div class="clear"></div>
+<h2 class="pagetitle">The Story of watbus</h2>
+<div class="single">
+    <p>watbus was created at the <a href="http://cutc.ca/">CUTC</a> hackathon in May of 2013. It was originally coded in PHP with no webframework whatsoever. The developers thought it would be a good idea to continue with the project, but with a MVC architecture and a better language the next time around.</p>
+    <p>Marc chose to use the Django MVC web framework and SQLite (now MySQL) to store the enormous amount of transit data. He is responsible for manipulating the data and ensuring that bus scheduls are always complete and accurate. Marc also wrangled with Dreamhost and got Django and Python to co-operate on the shared server (Try it, it's painful.)</p>
+    <p>Holly used Javascript for the Google Maps API and various dynamic elements of the site. Bus stop data from the database was retrieved using JSON/AJAX and plotted on the map. Designing and styling watbus was done by Holly as well.</p>
+    <p>The current design is called "watbus Terminal". The developers coded almost the entirety of this website in Vim in the Terminal. Bus terminal... computer terminal... ha ha. How punny.</p>
+</div>
+<h2 class="pagetitle">Coming soon to watbus!</h2>
+<div class="left">
+    <h3 class="pagesubtitle">New Features</h3>
+    <ul>
+        <li>Allow users to specify "favourite" stops</li>
+        <li>Add a map on each bus trip page, displaying all stops</li>
+        <li>Design text-only view</li>
+        <li>Smart search for bus, stop, and terminal</li>
+    </ul>
+</div>
+<div class="right">
+    <h3 class="pagesubtitle">Improvements</h3>
+    <ul>
+        <li>Bus times to dynamically refresh as time passes</li>
+        <li>Speed up map load time (even more!)</li>
+        <li>Reduce the number of markers on the map</li>
+        <li>Fix the sitemap page</li>
+    </ul>
+</div>
+<div class="clear"></div>
+<div class="single">
+    <h2 class="pagetitle">Credits</h2>
+    <ul>
+        <li><a href="https://bitbucket.org/weholt/dse4">Simplified bulk insert script for Django</a> by weholt</li>
+        <li><a href="http://gmap3.net/">gmap3</a> Google Maps jquery plugin</li>
+        <li><a href="https://developers.google.com/maps/">Google Maps API</a></li>
+        <li><a href="http://www.regionofwaterloo.ca/en/regionalGovernment/OpenDataCatalogue.asp">Region of Waterloo Open Data</a></li>
+        <li>Thanks to <a href="http://team781.com/">FIRST&reg; Team 781</a> for providing free webhosting</li>
+    </ul>
+</div>
+<div class="single">
+    <h2 class="pagetitle">Contact</h2>
+    <p>Comments? Suggestions? Feel free to e-mail us at watbusca @ gmail dot com</p>
+</div>
+<div class="single">
+    <p>watbus &copy; 2013 <a href="https://github.com/mrpoulin">Marc Poulin</a> and <a href="https://github.com/hollyxu">Holly Xu</a>.
+    </p>
 {% endblock %}

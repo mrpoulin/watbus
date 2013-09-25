@@ -1,7 +1,20 @@
 
+.left {float: left; width: 50%; }
+.right {float: right; width: 50%; }
+.left p, .right p {padding: 0 10px 0 10px;}
+
 /* ----- About ----- */
 
-.about #content {padding: 0 10px 0 10px;}
+.about #content {padding: 0 10px 0 10px; line-height: 150%; 
+    color: #dddddd;}
+h2.pagetitle { color: #aaaaaa;
+    font-family: 'Source Code Pro', Consolas, monaco, monospace;}
+h3.pagesubtitle { color: #ffffff; font-size: 18px; text-align: center;
+    font-family: 'Source Code Pro', Consolas, monaco, monospace;}
+.portrait {text-align: center;}
+.portrait img {border: 10px solid #000000;}
+
+.about ul li {list-style: square; }
 
 /* ----- Sitemap ----- */
 
@@ -12,3 +25,4 @@
 .sitemap .terminallist_terminal, .stoplist_stop { padding: 3px; 
     font-size: 10px; background: #000000;  display: inline-table;
     border: 0; margin: 0 3px 0 3px;}
+

@@ -3,16 +3,37 @@
 
 h2.pagetitle { padding: 20px 0 20px 0; text-align: center; 
     color: #888888; font-weight: 400; font-size: 16px;
-    text-transform: uppercase; letter-spacing: 5px;}
+    text-transform: uppercase; }
 h3.pagesubtitle { font-size: 20px; font-weight: 200; margin: 0;
     color: #ffffff;
     font-family: 'Source Code Pro', Consolas, monaco, monospace;  
 }
 
-/* ---- Popular ---- */
 
-.popularcol {display: inline-block; float: left; 
-    width: 33%; min-width: 200px; }
+/* ---- Responsive ---- */
+
+@media screen and (max-width: 639px) {
+    .popularcol {display: block; }
+    .triplist_trip {letter-spacing: -1px;}
+    h2.pagetitle {letter-spacing: 1px; }
+    ul.sublist {clear: both; }
+    ul.sublist li {display: inline-block; width: 30%; text-align: center;
+        margin: 10px 0 10px 0; }
+}
+@media screen and (min-width: 640px) and (max-width: 959px) {
+    .popularcol {display: inline-block; float: left; width: 33%; }
+    h2.pagetitle {letter-spacing: 5px;}
+    ul.sublist {clear: both; }
+    ul.sublist li {display: inline-block; width: 30%; text-align: center;
+        margin: 10px 0 10px 0; }
+}
+@media screen and (min-width: 960px) {
+    .popularcol {display: inline-block; float: left; width: 33%; }
+    h2.pagetitle {letter-spacing: 5px;}
+    ul.sublist { float: right; margin: 0 0 10px 0; }
+}
+
+/* ---- Popular ---- */
 
 h3 span.rightarrow {color: #f94290; }
 
@@ -31,8 +52,7 @@ li.stoplist_bus { font-size: 24px; clear: both;
 .headsign a.busname { color: #ede22a; font-size: 16px; letter-spacing: -1px; }
 .headsign a:hover {color: #ffffff; }
 
-ul.sublist { padding: 0; margin: 0; font-size: 16px; float: right; 
-    margin: 0 0 10px 0; }
+ul.sublist { padding: 0; font-size: 16px;  }
 li.sublist_time {list-style: none; display: inline-block; padding: 0; }
 
 .actual_time {color: #888888; }
