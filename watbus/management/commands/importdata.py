@@ -133,10 +133,15 @@ class Command(BaseCommand):
 
     def _import_trips(self, path):
 
+        seen = set()
         with transaction.commit_on_success():
             with Trips.delayed as d: 
                 for data in self._parse_csv(path, ','):
-                    d.insert(data)
+                    if data['trip_id'] not in seen:
+                        seen.add(data['trip_id'])
+                        d.insert(data)
+                    else:
+                        print "\n" + data['trip_id'] + " Duplicate\n"
 
     def _import_stops(self, path):
 
