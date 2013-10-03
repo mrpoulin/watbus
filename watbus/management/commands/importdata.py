@@ -133,15 +133,12 @@ class Command(BaseCommand):
 
     def _import_trips(self, path):
 
-        seen = set()
         with transaction.commit_on_success():
             with Trips.delayed as d: 
                 for data in self._parse_csv(path, ','):
-                    if data['trip_id'] not in seen:
-                        seen.add(data['trip_id'])
+                    #Get rid of this nonsense.
+                    if data['service_id'] != "13FALL-All-Weekday-06" and data['service_id'] != "13FALL-All-Saturday-04":
                         d.insert(data)
-                    else:
-                        print "\n" + data['trip_id'] + " Duplicate\n"
 
     def _import_stops(self, path):
 
@@ -158,11 +155,32 @@ class Command(BaseCommand):
 
         with transaction.commit_on_success():
             with StopTimes.delayed as d:
+                seen_trips = set()
+                current_trip = None
+                do_import = False
+
                 for data in self._parse_csv(path, ','):
+                    tripid = data['trip_id']
+
+                    if current_trip == None:
+                        current_trip = tripid
+                        do_import = True
+                    elif current_trip != tripid:
+                        if tripid in seen_trips:
+                            do_import = False
+                        else:
+                            seen_trips.add(current_trip)
+                            do_import = True
+
+                        current_trip = tripid
+
+                    if do_import:
                         data['arrival_time'] = self._convert_time(data['arrival_time']).__str__()
                         data['departure_time'] = self._convert_time(data['departure_time']).__str__()
                         data['stop_sequence'] = int(data['stop_sequence'])
                         d.insert(data)
+                    
+                    
 
     def _postprocess(self):
         #Stop that has no buses coming to it. Messes up the KCI terminal
