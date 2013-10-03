@@ -9,7 +9,7 @@ def location_type_to_string(loc_num):
     elif loc_num == 1:
         return "School"
     elif loc_num == 2:
-        return "Commerical"
+        return "Commercial"
     else:
         return "Invalid loc_num in filter."
 
