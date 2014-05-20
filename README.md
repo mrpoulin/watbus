@@ -1,5 +1,7 @@
 # watbus
 
+![Watbus Example](/img/watbus_screenshot.png)
+
 watbus is a web application to summarize and display bus stop times in a useful way.
 It is written to use Grand River Transit's GTFS data.
 
