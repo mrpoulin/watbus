@@ -25,3 +25,18 @@ The setup script runs two admin commands, getdata and importdata, which can be r
 #### Dependencies
 
 **DSE**: https://bitbucket.org/weholt/dse4
+
+## Run Watbus
+
+Run `python manage.py runserver` in the root directory
+
+## Contributors
+
+* Marc Poulin
+* Holly Xu
+
+## Credits & Thanks
+
+* [Spin.JS](http://fgnass.github.io/spin.js/)
+* [Google Maps API](https://developers.google.com/maps/)
+* [Waterloo Region Open Data Catalog](http://www.regionofwaterloo.ca/en/regionalGovernment/OpenDataCatalogue.asp)
